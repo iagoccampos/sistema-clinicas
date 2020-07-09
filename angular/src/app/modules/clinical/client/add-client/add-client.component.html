@@ -1,0 +1,42 @@
+<h3>Adicionar</h3>
+<form [formGroup]="addClientForm" (ngSubmit)="submit()">
+	<div class="form-row">
+		<div class="form-group col-sm-5 col-xl-4">
+			<label for="name">Nome:</label>
+			<input type="text" id="name" class="form-control" formControlName="name" appInputUppercase appInputName>
+			<div *ngIf="name.invalid && name.touched">
+				<div class="invalid-feedback" *ngIf="name.errors.required">
+					Nome do cliente é necessário.
+				</div>
+			</div>
+		</div>
+		<div class="form-group col-2">
+			<label for="card">Núm. de ficha:</label>
+			<input type="text" id="card" class="form-control" formControlName="card" appInputUppercase appInputCard>
+			<div *ngIf="card.invalid && card.touched">
+				<div class="invalid-feedback" *ngIf="card.errors.cardExists">
+					Número de ficha já existente.
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-sm-2 col-xl-2">
+			<label for="rg">RG:</label>
+			<input type="text" id="rg" class="form-control" formControlName="rg" appInputNumber>
+		</div>
+		<div class="form-group col-sm-2 col-xl-2">
+			<label for="cpf">CPF:</label>
+			<input type="text" id="cpf" class="form-control" formControlName="cpf" appInputNumber>
+		</div>
+		<div class="form-group col-sm-3 col-xl-2">
+			<label for="birthday">Data nascimento:</label>
+			<input type="date" id="birthday" class="form-control" formControlName="birthday" appInputNumber>
+		</div>
+	</div>
+	<div class="btn-group">
+		<input type="submit" class="btn btn-primary" value="Adicionar" [disabled]="addClientForm.disabled">
+		<input type="reset" class="btn btn-danger" value="Limpar" (click)="clearForm()" [disabled]="addClientForm.disabled">
+	</div>
+	<div class="spinner-border side-spinner align-bottom" *ngIf="addClientForm.disabled"></div>
+</form>

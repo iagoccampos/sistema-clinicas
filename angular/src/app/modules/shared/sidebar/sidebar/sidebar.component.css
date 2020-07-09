@@ -1,0 +1,24 @@
+.sidebar {
+	padding-top: 10px;
+	height: 100%;
+}
+
+.sidebar .item {
+	font-weight: 500;
+	color: #333;
+	cursor: pointer;
+}
+
+.sidebar .item i {
+	width: 16px;
+	height: 16px;
+}
+
+.sidebar .item i {
+	margin-right: 6px;
+	color: #999;
+}
+
+.sidebar .item:hover i, .sidebar .item.active i {
+	color: inherit;
+}

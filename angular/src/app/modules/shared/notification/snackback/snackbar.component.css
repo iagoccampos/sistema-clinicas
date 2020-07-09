@@ -1,0 +1,8 @@
+.snackbar{
+	text-align: center;
+  	position: fixed;
+  	z-index: 1;
+	bottom: 30px;
+	left: 50%;
+	transform: translateX(-50%);
+}
