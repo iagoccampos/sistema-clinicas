@@ -1,1 +1,0 @@
-{"version":3,"file":"clinic.schema.js","sourceRoot":"","sources":["../../../src/modules/clinic/clinic.schema.ts"],"names":[],"mappings":";;AAAA,qCAAoC;AAEvB,QAAA,YAAY,GAAG,IAAI,QAAQ,CAAC,MAAM,CAAC;IAC/C,IAAI,EAAE;QACL,IAAI,EAAE,MAAM;QACZ,QAAQ,EAAE,IAAI;KACd;IACD,KAAK,EAAE;QACN,IAAI,EAAE,QAAQ,CAAC,MAAM,CAAC,KAAK,CAAC,QAAQ;QACpC,QAAQ,EAAE,IAAI;KACd;CACD,CAAC,CAAA"}
