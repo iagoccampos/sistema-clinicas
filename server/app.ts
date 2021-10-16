@@ -1,18 +1,18 @@
 import express from 'express'
-import bodyparser from 'body-parser'
+import morgan from 'morgan'
 import mongoose from 'mongoose'
-import routesV1 from './routes/apiV1'
-import ErrorHandler from './util/errorHandler'
+import api from './routes/api'
+import errorHandler from './util/errorHandler'
 
 mongoose.connect('mongodb://localhost:27017/sistema-clinicas', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false })
 
 const app = express()
+app.use(morgan('dev'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-app.use(bodyparser.json())
-app.use(bodyparser.urlencoded({ extended: true }))
-
-app.use('/apiv1', routesV1)
-app.use(ErrorHandler.handle)
+app.use('/api', api)
+app.use(errorHandler.handle)
 
 const port = 3000 || process.env.PORT
 app.listen(port, () => {

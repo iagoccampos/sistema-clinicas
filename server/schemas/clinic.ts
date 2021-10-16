@@ -6,12 +6,12 @@ export interface IClinic {
 
 interface IDocClinic extends Document, IClinic { }
 
-const schema = new Schema({
+const clinicSchema = new Schema({
 	name: {
 		type: String,
 		required: true
 	}
 })
 
-const md = model<IDocClinic>('Clinic', schema)
-export default md
+const clinicModel = model<IDocClinic>('Clinic', clinicSchema)
+export default clinicModel

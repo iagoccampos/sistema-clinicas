@@ -2,7 +2,6 @@ import { Schema, model, Document } from 'mongoose'
 import crypto from 'crypto'
 
 export interface IUser {
-	_id: string
 	username: string
 	password: string
 }
@@ -19,7 +18,7 @@ export interface IUpdateUser {
 
 interface IDocUser extends IUser, Document { }
 
-const UserSchema = new Schema({
+const userSchema = new Schema({
 	username: {
 		type: String,
 		required: true,
@@ -41,5 +40,5 @@ const UserSchema = new Schema({
 	}
 })
 
-const userModel = model<IDocUser>('User', UserSchema)
+const userModel = model<IDocUser>('User', userSchema)
 export default userModel

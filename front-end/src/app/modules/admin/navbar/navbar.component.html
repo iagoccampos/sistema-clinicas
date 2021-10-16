@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+	<span style="margin-right: 16px;">Sistema Clinicas</span>
+	<button mat-button mat-focus-indicator [routerLink]="['/clinicas']">
+		Clínicas
+	</button>
+	<span class="spacer"></span>
+	<button mat-icon-button aria-label="Logout" (click)="logout()">
+		<span class="material-icons">
+			exit_to_app
+		</span>
+	</button>
+</mat-toolbar>
