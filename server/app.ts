@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import api from './routes/api'
 import errorHandler from './util/errorHandler'
 
-mongoose.connect('mongodb://localhost:27017/sistema-clinicas', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false })
+mongoose.connect('mongodb://localhost:27017/sistema-clinicas')
 
 const app = express()
 app.use(morgan('dev'))

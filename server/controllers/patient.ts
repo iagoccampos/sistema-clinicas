@@ -1,18 +1,18 @@
 import express from 'express'
-import PatientModel from '../models/patient'
+import PatientModel from '../models/clinical/patient'
 
 const router = express.Router({ mergeParams: true })
 
-router.get('', async (req, res, next) => {
+router.get<{ clinicId: string }>('', async (req, res, next) => {
 	try {
-		const patients = await PatientModel.getPatients(req.params.clinicId, req.query as any)
+		const patients = await PatientModel.getPatients(req.params.clinicId, req.query)
 		res.json(patients)
 	} catch (err) {
 		next(err)
 	}
 })
 
-router.post('', async (req, res, next) => {
+router.post<{ clinicId: string }>('', async (req, res, next) => {
 	try {
 		const patient = await PatientModel.create(req.params.clinicId, req.body)
 		res.json(patient)

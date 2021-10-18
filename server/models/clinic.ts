@@ -1,22 +1,24 @@
-import ClinicModel, { IClinic } from '../schemas/clinic'
+import Clinic, { IClinic } from '../schemas/clinic'
 
-const createClinic = async (newClinic: IClinic) => {
-	const clinic = new ClinicModel(newClinic)
-	await clinic.save({ validateBeforeSave: true })
+class ClinicModel {
+	async createClinic(newClinic: IClinic) {
+		const clinic = new Clinic(newClinic)
+		await clinic.save({ validateBeforeSave: true })
 
-	return clinic
+		return clinic
+	}
+
+	async getClinics() {
+		return Clinic.find().lean().exec()
+	}
+
+	async getClinic(id: string) {
+		return Clinic.findById(id).lean().exec()
+	}
+
+	async deleteClinic(id: string) {
+		return Clinic.findByIdAndDelete(id).lean().exec()
+	}
 }
 
-const getClinics = () => {
-	return ClinicModel.find().lean().exec()
-}
-
-const getClinic = (id: string) => {
-	return ClinicModel.findById(id).lean().exec()
-}
-
-const deleteClinic = async (id: string) => {
-	return ClinicModel.findByIdAndDelete(id).lean().exec()
-}
-
-export default { createClinic, getClinics, getClinic, deleteClinic }
+export default new ClinicModel()

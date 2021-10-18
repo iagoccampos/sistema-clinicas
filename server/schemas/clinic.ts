@@ -11,7 +11,7 @@ const clinicSchema = new Schema({
 		type: String,
 		required: true
 	}
-})
+}, { timestamps: true })
 
-const clinicModel = model<IDocClinic>('Clinic', clinicSchema)
-export default clinicModel
+const Clinic = model<IDocClinic>('Clinic', clinicSchema)
+export default Clinic

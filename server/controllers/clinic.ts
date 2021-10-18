@@ -1,11 +1,11 @@
 import express from 'express'
-import Clinic from '../models/clinic'
+import ClinicModel from '../models/clinic'
 
 const router = express.Router()
 
 router.get('', async (req, res, next) => {
 	try {
-		const clinics = await Clinic.getClinics()
+		const clinics = await ClinicModel.getClinics()
 		res.json(clinics)
 	} catch (e) {
 		next(e)
@@ -14,7 +14,7 @@ router.get('', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
 	try {
-		const clinic = await Clinic.getClinic(req.params.id)
+		const clinic = await ClinicModel.getClinic(req.params.id)
 		res.json(clinic)
 	} catch (e) {
 		next(e)
@@ -23,7 +23,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('', async (req, res, next) => {
 	try {
-		const clinic = await Clinic.createClinic(req.body)
+		const clinic = await ClinicModel.createClinic(req.body)
 		res.json(clinic)
 	} catch (e) {
 		next(e)
@@ -32,7 +32,7 @@ router.post('', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
 	try {
-		const clinic = await Clinic.deleteClinic(req.params.id)
+		const clinic = await ClinicModel.deleteClinic(req.params.id)
 		res.json(clinic)
 	} catch (e) {
 		next(e)

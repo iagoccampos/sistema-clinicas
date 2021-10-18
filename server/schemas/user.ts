@@ -38,7 +38,7 @@ const userSchema = new Schema({
 			return hash.digest('hex')
 		}
 	}
-})
+}, { timestamps: true })
 
-const userModel = model<IDocUser>('User', userSchema)
-export default userModel
+const User = model<IDocUser>('User', userSchema)
+export default User
