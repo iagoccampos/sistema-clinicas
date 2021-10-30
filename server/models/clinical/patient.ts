@@ -36,7 +36,7 @@ class PatientModel {
 		const total = await Patient.find({ clinic: clinicId, ...mappedQuery }).countDocuments().exec()
 		const patientsQuery = Patient.find({ clinic: clinicId, ...mappedQuery })
 
-		if (page && limit) {
+		if (!isNaN(page) && !isNaN(limit)) {
 			patientsQuery.skip(+page * +limit).limit(+limit)
 		}
 

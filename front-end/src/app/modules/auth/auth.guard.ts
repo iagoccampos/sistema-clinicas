@@ -2,14 +2,13 @@ import { CanLoad, CanActivate, Route, UrlSegment, ActivatedRouteSnapshot, Router
 import { Observable } from 'rxjs'
 import { Injectable } from '@angular/core'
 import { AuthService } from '../../services/auth.service'
-import { NotificationService } from '../shared/notification/notification.service'
 
 @Injectable({
 	providedIn: 'root'
 })
 export class AuthGuard implements CanLoad, CanActivate, CanActivateChild {
 
-	constructor(private authService: AuthService, private notificationService: NotificationService, private router: Router) { }
+	constructor(private authService: AuthService, private router: Router) { }
 
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
 		boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
@@ -28,7 +27,7 @@ export class AuthGuard implements CanLoad, CanActivate, CanActivateChild {
 
 	handleAuth() {
 		if (!this.authService.isLoggedIn()) {
-			this.notificationService.showError('Faça login para acesso.')
+			// this.notificationService.showError('Faça login para acesso.')
 			this.router.navigate(['login'])
 			return false
 		}

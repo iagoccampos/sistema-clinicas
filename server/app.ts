@@ -3,6 +3,12 @@ import morgan from 'morgan'
 import mongoose from 'mongoose'
 import api from './routes/api'
 import errorHandler from './util/errorHandler'
+import dotenv from 'dotenv'
+import dotenvParseVariables from 'dotenv-parse-variables'
+
+let env = dotenv.config()
+if (env.error || !env.parsed) throw env.error
+env = dotenvParseVariables(env.parsed, { assignToProcessEnv: true, overrideProcessEnv: true })
 
 mongoose.connect('mongodb://localhost:27017/sistema-clinicas')
 
@@ -14,7 +20,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api', api)
 app.use(errorHandler.handle)
 
-const port = 3000 || process.env.PORT
+const port = +process.env.PORT || 3000
 app.listen(port, () => {
 	console.log(`Server started. Port: ${port}`)
 	createDefaultUser()

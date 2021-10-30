@@ -5,7 +5,7 @@ export interface IPatient {
 	name: string
 	birthday?: Date
 	rg?: string
-	clinic: string
+	clinic: Schema.Types.ObjectId | string
 }
 
 export interface INewPatient {
@@ -14,9 +14,7 @@ export interface INewPatient {
 	rg?: string
 }
 
-interface IDocPatient extends IPatient, Document { }
-
-const patientSchema = new Schema({
+const patientSchema = new Schema<IPatient>({
 	card: {
 		type: Number
 	},
@@ -41,13 +39,11 @@ const patientSchema = new Schema({
 	optimisticConcurrency: true
 })
 
-patientSchema.pre('save', async function (next) {
-	const doc = this as IDocPatient
-	const biggestCard = (await patientModel.findOne({ clinic: doc.clinic }, { card: 1 }, { sort: { card: -1 } }))?.card
-
-	doc.card = biggestCard ? biggestCard + 1 : 1
+patientSchema.pre('save', async function (this: IPatient, next) {
+	const biggestCard = (await patientModel.findOne({ clinic: this.clinic }, { card: 1 }, { sort: { card: -1 } }))?.card
+	this.card = biggestCard ? biggestCard + 1 : 1
 	next()
 })
 
-const patientModel = model<IDocPatient>('ClinicalPatient', patientSchema)
+const patientModel = model<IPatient>('ClinicalPatient', patientSchema)
 export default patientModel

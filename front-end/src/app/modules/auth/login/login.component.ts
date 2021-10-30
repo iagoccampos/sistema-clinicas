@@ -8,6 +8,8 @@ import { AuthService } from '../../../services/auth.service'
 	styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+	hide = true
+
 	loginForm = new FormGroup({
 		username: new FormControl('', [Validators.required, Validators.maxLength(20)]),
 		password: new FormControl('', [Validators.required, Validators.maxLength(20)])

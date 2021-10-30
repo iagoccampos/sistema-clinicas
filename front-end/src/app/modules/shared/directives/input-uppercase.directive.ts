@@ -6,9 +6,9 @@ import { NgControl } from '@angular/forms'
 })
 export class InputUppercaseDirective {
 
-	constructor (private elRef: ElementRef, private control: NgControl) { }
+	constructor(private elRef: ElementRef, private control: NgControl) { }
 
-	@HostListener('input') onInput () {
+	@HostListener('input') onInput() {
 		const value: string = this.elRef.nativeElement.value
 
 		if (this.control.control) {

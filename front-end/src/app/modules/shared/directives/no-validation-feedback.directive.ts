@@ -5,9 +5,9 @@ import { Directive, Renderer2, OnInit, ElementRef } from '@angular/core'
 })
 export class NoValidationFeedbackDirective implements OnInit {
 
-	constructor (private elRef: ElementRef, private renderer: Renderer2) { }
+	constructor(private elRef: ElementRef, private renderer: Renderer2) { }
 
-	ngOnInit () {
+	ngOnInit() {
 		this.renderer.addClass(this.elRef.nativeElement, 'no-validate')
 	}
 }

@@ -1,7 +1,7 @@
 import { trigger, state, style, transition, animate } from '@angular/animations'
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { MatPaginator } from '@angular/material/paginator'
+import { MatPaginator, PageEvent } from '@angular/material/paginator'
 import { MatTableDataSource } from '@angular/material/table'
 import { ActivatedRoute } from '@angular/router'
 import { merge, Observable, race, Subject } from 'rxjs'
@@ -38,12 +38,9 @@ export class PatientComponent implements OnInit, AfterViewInit {
 		card: new FormControl('')
 	})
 
-	onFormSubmit = new Subject()
 	displayedColumns: string[] = ['card', 'name', 'birthday']
 	dataSource: MatTableDataSource<Patient> = new MatTableDataSource()
 	expandedPatient: Patient | null = null
-	isLoadingResults = true
-	resultsLength = 0
 	savedFormValue: { [key: string]: string } = {}
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator
@@ -55,18 +52,11 @@ export class PatientComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		merge(this.paginator.page, this.onFormSubmit).pipe(
-			startWith(null),
-			switchMap(() => {
-				console.log(this.savedFormValue)
-				return this.patientService.getPatients(this.clinicId, this.savedFormValue, this.paginator.pageIndex, this.paginator.pageSize)
-			}),
-			tap((data) => {
-				this.isLoadingResults = false
-				this.resultsLength = data.total
-				this.dataSource = new MatTableDataSource(data.items)
-			})
-		).subscribe()
+		this.getPatients()
+
+		this.paginator.page.subscribe((el: PageEvent) => {
+			this.getPatients()
+		})
 	}
 
 	addNewPatient() {
@@ -74,9 +64,10 @@ export class PatientComponent implements OnInit, AfterViewInit {
 		this.patientService.createPatient(this.newPatientForm.value, clinicId)
 	}
 
-	findPatients() {
-		this.savedFormValue = this.findPatientsForm.value
-		this.paginator.firstPage()
-		this.onFormSubmit.next()
+	getPatients() {
+		return this.patientService.getPatients(this.clinicId, this.savedFormValue, this.paginator.pageIndex, this.paginator.pageSize).subscribe((data) => {
+			this.paginator.length = data.total
+			this.dataSource.data = data.items
+		})
 	}
 }

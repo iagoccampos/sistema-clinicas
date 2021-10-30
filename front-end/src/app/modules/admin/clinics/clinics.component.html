@@ -1,22 +1,24 @@
-<div class="grid-container">
-	<h1 class="mat-h1">Clinicas</h1>
-	<div *ngFor="let clinic of clinics">
-		<mat-card class="dashboard-card" [routerLink]="[clinic._id]">
-			<mat-card-header>
-				<mat-card-title>
-					{{clinic.name}}
-					<button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-						<mat-icon>more_vert</mat-icon>
-					</button>
-					<mat-menu #menu="matMenu" xPosition="before">
-						<button mat-menu-item>Configurações</button>
-					</mat-menu>
-				</mat-card-title>
-			</mat-card-header>
+<div class="container">
+	<h1>Clinicas</h1>
+	<div fxLayout="row">
+		<div *ngFor="let clinic of clinics" fxFlex="30">
+			<mat-card class="dashboard-card" [routerLink]="[clinic._id]">
+				<mat-card-header>
+					<mat-card-title>
+						{{clinic.name}}
+						<button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+							<mat-icon>more_vert</mat-icon>
+						</button>
+						<mat-menu #menu="matMenu" xPosition="before">
+							<button mat-menu-item>Configurações</button>
+						</mat-menu>
+					</mat-card-title>
+				</mat-card-header>
 
-			<mat-card-content class="dashboard-card-content">
-				<div>Card Content Here</div>
-			</mat-card-content>
-		</mat-card>
+				<mat-card-content class="dashboard-card-content">
+					<div>Card Content Here</div>
+				</mat-card-content>
+			</mat-card>
+		</div>
 	</div>
 </div>

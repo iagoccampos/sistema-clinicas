@@ -16,9 +16,7 @@ export interface IUpdateUser {
 	password?: string
 }
 
-interface IDocUser extends IUser, Document { }
-
-const userSchema = new Schema({
+const userSchema = new Schema<IUser>({
 	username: {
 		type: String,
 		required: true,
@@ -40,5 +38,5 @@ const userSchema = new Schema({
 	}
 }, { timestamps: true })
 
-const User = model<IDocUser>('User', userSchema)
+const User = model<IUser>('User', userSchema)
 export default User

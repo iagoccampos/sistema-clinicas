@@ -24,13 +24,12 @@ export class AuthService {
 		}
 	}
 
-	login(form: { username: string, password: string }): void {
+	login(form: { username: string, password: string }) {
 		this.http.post<{ auth: boolean, token: string }>(this.loginUrl, form).subscribe((result) => {
 			if (result.auth) {
 				this.token = result.token
 				this.currentUser = this.helper.decodeToken(this.token)
 				localStorage.setItem('token', this.token)
-
 				this.router.navigate(['/clinicas'])
 			}
 		})

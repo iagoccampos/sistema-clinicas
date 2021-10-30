@@ -4,14 +4,12 @@ export interface IClinic {
 	name: string
 }
 
-interface IDocClinic extends Document, IClinic { }
-
-const clinicSchema = new Schema({
+const clinicSchema = new Schema<IClinic>({
 	name: {
 		type: String,
 		required: true
 	}
 }, { timestamps: true })
 
-const Clinic = model<IDocClinic>('Clinic', clinicSchema)
+const Clinic = model<IClinic>('Clinic', clinicSchema)
 export default Clinic

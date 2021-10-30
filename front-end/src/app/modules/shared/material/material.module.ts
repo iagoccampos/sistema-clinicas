@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
 import { MatListModule } from '@angular/material/list'
 import { MatMenuModule } from '@angular/material/menu'
-import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatSelectModule } from '@angular/material/select'
 import { MatSidenavModule } from '@angular/material/sidenav'
@@ -111,7 +111,35 @@ class CustomDateAdapter extends NativeDateAdapter {
 	],
 	providers: [
 		{ provide: DateAdapter, useClass: CustomDateAdapter },
-		{ provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3000 } }
+		{ provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3000 } },
+		{
+			provide: MatPaginatorIntl,
+			useValue: (() => {
+				const paginatorIntl = new MatPaginatorIntl()
+				paginatorIntl.itemsPerPageLabel = 'Itens por página:'
+				paginatorIntl.firstPageLabel = 'Primeira página'
+				paginatorIntl.previousPageLabel = 'Página anterior'
+				paginatorIntl.nextPageLabel = 'Próxima página'
+				paginatorIntl.lastPageLabel = 'Última página'
+				paginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) => {
+					if (length === 0 || pageSize === 0) {
+						return `0 de ${length}`
+					}
+
+					length = Math.max(length, 0)
+
+					const startIndex = page * pageSize
+
+					const endIndex = startIndex < length ?
+						Math.min(startIndex + pageSize, length) :
+						startIndex + pageSize
+
+					return `${startIndex + 1} - ${endIndex} de ${length}`
+				}
+
+				return paginatorIntl
+			})()
+		}
 	]
 })
 

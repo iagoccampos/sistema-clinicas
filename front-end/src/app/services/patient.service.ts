@@ -10,14 +10,14 @@ export class PatientService {
 
 	constructor(private http: HttpClient, private snackbarService: SnackbarService) { }
 
-	getPatients(clinicId: string, filter: any, page: number, limit: number) {
-		const url = `/api/clinic/${clinicId}/patient`
-		const params = { ...filter, page: page.toString(), limit: limit.toString() }
+	getPatients(clinicId: string, filter: any, page?: number, limit?: number) {
+		const url = `/api/clinic/${clinicId}/clinical/patient`
+		const params = { ...filter, page, limit }
 		return this.http.get<{ total: number, items: Patient[] }>(url, { params })
 	}
 
 	createPatient(patient: NewPatient, clinicId: string) {
-		const url = `/api/clinic/${clinicId}/patient`
+		const url = `/api/clinic/${clinicId}/clinical/patient`
 		return this.http.post<Patient>(url, patient).subscribe((patient) => {
 			this.snackbarService.success('Paciente adicionado com sucesso.')
 		})

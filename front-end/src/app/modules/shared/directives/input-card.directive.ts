@@ -8,13 +8,13 @@ export class InputCardDirective implements OnInit {
 
 	private oldValue = ''
 
-	constructor (private elRef: ElementRef, private control: NgControl) { }
+	constructor(private elRef: ElementRef, private control: NgControl) { }
 
-	ngOnInit () {
+	ngOnInit() {
 		this.oldValue = this.elRef.nativeElement.value
 	}
 
-	@HostListener('input') onInput () {
+	@HostListener('input') onInput() {
 		const newValue: string = this.elRef.nativeElement.value
 
 		if (newValue && !(/^\d+$/.test(newValue) || /^\d{0,3}[A-Z]$/.test(newValue))) {
@@ -25,7 +25,7 @@ export class InputCardDirective implements OnInit {
 		this.oldValue = newValue
 	}
 
-	private setVal (val: string) {
+	private setVal(val: string) {
 		if (this.control.control) {
 			this.control.control.setValue(val)
 		}

@@ -8,13 +8,13 @@ export class InputNameDirective implements OnInit {
 
 	private oldValue = ''
 
-	constructor (private elRef: ElementRef, private control: NgControl) { }
+	constructor(private elRef: ElementRef, private control: NgControl) { }
 
-	ngOnInit () {
+	ngOnInit() {
 		this.oldValue = this.elRef.nativeElement.value
 	}
 
-	@HostListener('input') onInput () {
+	@HostListener('input') onInput() {
 		const newValue: string = this.elRef.nativeElement.value
 
 		if (newValue && !(/^[\wÀ-ú\s.]+$/.test(newValue))) {
@@ -25,7 +25,7 @@ export class InputNameDirective implements OnInit {
 		this.oldValue = newValue
 	}
 
-	private setVal (val: string) {
+	private setVal(val: string) {
 		if (this.control.control) {
 			this.control.control.setValue(val)
 		}
