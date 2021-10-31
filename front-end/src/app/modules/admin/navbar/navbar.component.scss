@@ -18,4 +18,8 @@ mat-toolbar {
 	button.selected {
 		background: rgba(0, 0, 0, 0.2);
 	}
+
+	> span {
+		margin-right: 16px;
+	}
 }

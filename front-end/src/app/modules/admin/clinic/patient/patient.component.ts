@@ -41,7 +41,6 @@ export class PatientComponent implements OnInit, AfterViewInit {
 	displayedColumns: string[] = ['card', 'name', 'birthday']
 	dataSource: MatTableDataSource<Patient> = new MatTableDataSource()
 	expandedPatient: Patient | null = null
-	savedFormValue: { [key: string]: string } = {}
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator
 
@@ -60,14 +59,15 @@ export class PatientComponent implements OnInit, AfterViewInit {
 	}
 
 	addNewPatient() {
-		const clinicId = this.router.snapshot.paramMap.get('clinicId') as string
-		this.patientService.createPatient(this.newPatientForm.value, clinicId)
+		this.patientService.createPatient(this.newPatientForm.value, this.clinicId)
+			.subscribe()
 	}
 
 	getPatients() {
-		return this.patientService.getPatients(this.clinicId, this.savedFormValue, this.paginator.pageIndex, this.paginator.pageSize).subscribe((data) => {
-			this.paginator.length = data.total
-			this.dataSource.data = data.items
-		})
+		this.patientService.getPatients(this.clinicId, this.findPatientsForm.value, this.paginator.pageIndex, this.paginator.pageSize)
+			.subscribe((data) => {
+				this.paginator.length = data.total
+				this.dataSource.data = data.items
+			})
 	}
 }

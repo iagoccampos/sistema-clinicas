@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { Error } from 'mongoose'
+import { Error as MongooseError } from 'mongoose'
 import { HttpError } from './errors'
 import Logger from './logger'
 
@@ -10,7 +10,7 @@ const handle = (err: any, req: Request, res: Response, next: NextFunction) => {
 			return res.status(400).json({ message: err.message })
 		}
 
-		if (err instanceof Error.ValidationError) {
+		if (err instanceof MongooseError.ValidationError) {
 			let message = 'Falha na validação.'
 
 			if (err.errors) {

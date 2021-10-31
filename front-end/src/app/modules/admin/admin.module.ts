@@ -10,6 +10,7 @@ import { AngularMaterialModule } from '../shared/material/material.module'
 import { OverviewComponent } from './clinic/overview/overview.component'
 import { NavbarComponent } from './navbar/navbar.component'
 import { PatientComponent } from './clinic/patient/patient.component'
+import { NavListItemComponent } from './clinic/sidenav/nav-list-item/nav-list-item.component'
 
 @NgModule({
 	declarations: [
@@ -19,7 +20,8 @@ import { PatientComponent } from './clinic/patient/patient.component'
 		SidenavComponent,
 		OverviewComponent,
 		NavbarComponent,
-		PatientComponent
+		PatientComponent,
+		NavListItemComponent
 	],
 	imports: [CommonModule, SharedModule, AngularMaterialModule, LayoutModule]
 })

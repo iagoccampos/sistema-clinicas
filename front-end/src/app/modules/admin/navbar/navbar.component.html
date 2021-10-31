@@ -1,10 +1,10 @@
 <mat-toolbar color="primary">
-	<button mat-icon-button>
+	<button mat-icon-button (click)="toggleSidenav()">
 		<span class="material-icons">
 			menu
 		</span>
 	</button>
-	<span style="margin-right: 16px;">Sistema Clinicas</span>
+	<span>Sistema Clinicas</span>
 	<button mat-flat-button mat-focus-indicator [routerLink]="['/clinicas']" routerLinkActive="selected">
 		Clínicas
 	</button>

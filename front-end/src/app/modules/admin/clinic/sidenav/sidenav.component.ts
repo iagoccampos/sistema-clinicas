@@ -1,20 +1,52 @@
-import { AfterViewInit, ApplicationRef, Component, OnDestroy, OnInit } from '@angular/core'
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { MatSidenav } from '@angular/material/sidenav'
 import { Subscription } from 'rxjs'
 import { ClinicModel } from 'src/app/models/clinic.model'
 import { ClinicService } from 'src/app/services/clinic.service'
+import { NavService } from 'src/app/services/nav.service'
+import { NavItem } from './nav-list-item/nav-list-item.component'
 
 @Component({
 	selector: 'app-sidenav',
 	templateUrl: './sidenav.component.html',
 	styleUrls: ['./sidenav.component.scss']
 })
-export class SidenavComponent implements OnInit, OnDestroy {
+export class SidenavComponent implements OnInit, OnDestroy, AfterViewInit {
 	opened = true
 	clinic: ClinicModel | null = null
 
+	@ViewChild('sidenav') sideNav: MatSidenav | null = null
 	private subscription: Subscription | null = null
 
-	constructor(private clinicService: ClinicService, private appRef: ApplicationRef) { }
+	navItems: NavItem[] = [{
+		displayName: 'Visão geral',
+		iconName: '',
+		route: '/dashboard'
+	}, {
+		displayName: 'Clínico',
+		iconName: '',
+		children: [
+			{
+				displayName: 'Pacientes',
+				iconName: '',
+				route: `./clinico/pacientes`
+			}
+		]
+	}, {
+		displayName: 'Ortodontia',
+		iconName: '',
+		children: []
+	}, {
+		displayName: 'Endodontia',
+		iconName: '',
+		children: []
+	}]
+
+	constructor(private clinicService: ClinicService, private navService: NavService) { }
+
+	ngAfterViewInit() {
+		this.navService.sideNav = this.sideNav
+	}
 
 	ngOnInit() {
 		this.subscription = this.clinicService.onClinicChanged.subscribe((clinic) => this.clinic = clinic)
