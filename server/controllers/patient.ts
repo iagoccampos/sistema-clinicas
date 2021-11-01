@@ -1,5 +1,5 @@
 import express from 'express'
-import PatientModel from '../models/clinical/patient'
+import PatientModel from '../models/patient'
 
 const router = express.Router({ mergeParams: true })
 

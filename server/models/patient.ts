@@ -1,4 +1,4 @@
-import Patient, { INewPatient } from '../../schemas/clinical/patient'
+import Patient, { INewPatient } from '../schemas/patient'
 
 interface Query {
 	name?: string

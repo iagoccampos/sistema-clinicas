@@ -21,17 +21,15 @@ export class SidenavComponent implements OnInit, OnDestroy, AfterViewInit {
 	navItems: NavItem[] = [{
 		displayName: 'Visão geral',
 		iconName: '',
-		route: '/dashboard'
+		route: './dashboard'
+	}, {
+		displayName: 'Pacientes',
+		iconName: '',
+		route: `./clinico/pacientes`
 	}, {
 		displayName: 'Clínico',
 		iconName: '',
-		children: [
-			{
-				displayName: 'Pacientes',
-				iconName: '',
-				route: `./clinico/pacientes`
-			}
-		]
+		children: []
 	}, {
 		displayName: 'Ortodontia',
 		iconName: '',

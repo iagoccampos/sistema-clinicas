@@ -5,6 +5,7 @@ export interface IPatient {
 	name: string
 	birthday?: Date
 	rg?: string
+	cpf?: string
 	clinic: Schema.Types.ObjectId | string
 }
 
@@ -29,6 +30,9 @@ const patientSchema = new Schema<IPatient>({
 	rg: {
 		type: String
 	},
+	cpf: {
+		type: String
+	},
 	clinic: {
 		type: Schema.Types.ObjectId,
 		ref: 'Clinic',
@@ -45,5 +49,5 @@ patientSchema.pre('save', async function (this: IPatient, next) {
 	next()
 })
 
-const patientModel = model<IPatient>('ClinicalPatient', patientSchema)
+const patientModel = model<IPatient>('Patient', patientSchema)
 export default patientModel

@@ -23,6 +23,6 @@ export class PatientService {
 	}
 
 	private generateUrl(clinicId: string) {
-		return `/api/clinic/${clinicId}/clinical/patient`
+		return `/api/clinic/${clinicId}/patient`
 	}
 }

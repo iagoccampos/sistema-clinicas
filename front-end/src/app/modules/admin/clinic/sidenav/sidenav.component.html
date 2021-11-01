@@ -1,16 +1,6 @@
 <mat-sidenav-container class="container">
 	<mat-sidenav #sidenav mode="side" [opened]="opened">
 		<h1>Clínica: {{ clinic?.name }}</h1>
-		<!-- <mat-nav-list>
-			<a mat-list-item [routerLink]="['./dashboard']">Visão geral</a>
-			<a mat-list-item [routerLink]="['./clinico/pacientes']">Pacientes</a>
-			<hr>
-			<a mat-list-item>Clínico</a>
-			<a mat-list-item>Ortodontia</a>
-			<a mat-list-item>Endodontia</a>
-			<hr>
-			<a mat-list-item>Configurações</a>
-		</mat-nav-list> -->
 		<mat-nav-list>
 			<app-nav-list-item *ngFor="let item of navItems" [item]="item"></app-nav-list-item>
 		</mat-nav-list>
