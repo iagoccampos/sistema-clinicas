@@ -47,8 +47,7 @@ const pipes = [
 	],
 	declarations: [
 		...directives,
-		...pipes,
-		RgPipe
+		...pipes
 	],
 	exports: [
 		...modules,
