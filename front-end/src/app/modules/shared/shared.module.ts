@@ -14,6 +14,7 @@ import { InputUppercaseDirective } from './directives/input-uppercase.directive'
 import { AngularMaterialModule } from './material/material.module'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { RgPipe } from './pipes/rg.pipe'
+import { CpfPipe } from './pipes/cpf.pipe'
 
 const modules = [
 	CommonModule,
@@ -35,7 +36,8 @@ const directives = [
 
 const pipes = [
 	CardPipe,
-	RgPipe
+	RgPipe,
+	CpfPipe
 ]
 
 @NgModule({
