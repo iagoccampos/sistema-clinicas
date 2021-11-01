@@ -26,7 +26,8 @@ export class PatientComponent implements OnInit, AfterViewInit {
 	newPatientForm = new FormGroup({
 		name: new FormControl('', [Validators.required, Validators.maxLength(40)]),
 		birthday: new FormControl(''),
-		rg: new FormControl('')
+		rg: new FormControl(''),
+		cpf: new FormControl('')
 	})
 
 	findPatientsForm = new FormGroup({
@@ -36,7 +37,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
 		card: new FormControl('')
 	})
 
-	displayedColumns: string[] = ['card', 'name', 'birthday', 'rg']
+	displayedColumns: string[] = ['card', 'name', 'birthday', 'rg', 'cpf']
 	dataSource: MatTableDataSource<Patient> = new MatTableDataSource()
 	expandedPatient: Patient | null = null
 
