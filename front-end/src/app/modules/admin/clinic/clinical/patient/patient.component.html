@@ -96,6 +96,11 @@
 						<td mat-cell *matCellDef="let row">{{row.birthday ? (row.birthday | date) : '' }}</td>
 					</ng-container>
 
+					<ng-container matColumnDef="rg">
+						<th mat-header-cell *matHeaderCellDef>RG</th>
+						<td mat-cell *matCellDef="let row">{{ row.rg | rg }}</td>
+					</ng-container>
+
 					<ng-container matColumnDef="expandedDetail">
 						<td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
 							<div class="patient-detail"

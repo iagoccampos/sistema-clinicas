@@ -4,8 +4,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatPaginator, PageEvent } from '@angular/material/paginator'
 import { MatTableDataSource } from '@angular/material/table'
 import { ActivatedRoute } from '@angular/router'
-import { merge, Observable, race, Subject } from 'rxjs'
-import { first, map, repeat, startWith, switchMap, take, takeLast, tap } from 'rxjs/operators'
 import { Patient } from 'src/app/models/patient.model'
 import { PatientService } from 'src/app/services/patient.service'
 
@@ -38,7 +36,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
 		card: new FormControl('')
 	})
 
-	displayedColumns: string[] = ['card', 'name', 'birthday']
+	displayedColumns: string[] = ['card', 'name', 'birthday', 'rg']
 	dataSource: MatTableDataSource<Patient> = new MatTableDataSource()
 	expandedPatient: Patient | null = null
 
