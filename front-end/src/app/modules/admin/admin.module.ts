@@ -9,7 +9,7 @@ import { LayoutModule } from '@angular/cdk/layout'
 import { AngularMaterialModule } from '../shared/material/material.module'
 import { OverviewComponent } from './clinic/overview/overview.component'
 import { NavbarComponent } from './navbar/navbar.component'
-import { PatientComponent } from './clinic/patient/patient.component'
+import { PatientComponent } from './clinic/clinical/patient/patient.component'
 import { NavListItemComponent } from './clinic/sidenav/nav-list-item/nav-list-item.component'
 
 @NgModule({
