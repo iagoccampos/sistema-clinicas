@@ -14,13 +14,13 @@
 		<form [formGroup]="newPatientForm" (ngSubmit)="addNewPatient()">
 			<div fxLayout="row" fxLayoutGap="16px">
 				<div fxFlex>
-					<mat-form-field appearance="outline">
+					<mat-form-field>
 						<mat-label>Nome Completo</mat-label>
 						<input matInput formControlName="name" maxlength="40">
 					</mat-form-field>
 				</div>
 				<div fxFlex>
-					<mat-form-field appearance="outline">
+					<mat-form-field>
 						<mat-label>Data de nascimento</mat-label>
 						<input matInput [matDatepicker]="picker" formControlName="birthday">
 						<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -28,13 +28,13 @@
 					</mat-form-field>
 				</div>
 				<div fxFlex>
-					<mat-form-field appearance="outline">
+					<mat-form-field>
 						<mat-label>RG</mat-label>
 						<input matInput formControlName="rg">
 					</mat-form-field>
 				</div>
 				<div fxFlex>
-					<mat-form-field appearance="outline">
+					<mat-form-field>
 						<mat-label>CPF</mat-label>
 						<input matInput formControlName="cpf">
 					</mat-form-field>
@@ -54,13 +54,13 @@
 		<form [formGroup]="findPatientsForm" (ngSubmit)="getPatients()">
 			<div fxLayout="row" fxLayoutGap="16px">
 				<div fxFlex>
-					<mat-form-field appearance="fill">
+					<mat-form-field>
 						<mat-label>Nome</mat-label>
 						<input matInput formControlName="name" maxlength="40">
 					</mat-form-field>
 				</div>
 				<div fxFlex>
-					<mat-form-field appearance="fill">
+					<mat-form-field>
 						<mat-label>Data de nascimento</mat-label>
 						<input matInput [matDatepicker]="picker2" formControlName="birthday">
 						<mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -68,13 +68,13 @@
 					</mat-form-field>
 				</div>
 				<div fxFlex>
-					<mat-form-field appearance="fill">
+					<mat-form-field>
 						<mat-label>RG</mat-label>
 						<input matInput formControlName="rg">
 					</mat-form-field>
 				</div>
 				<div fxFlex>
-					<mat-form-field appearance="fill">
+					<mat-form-field>
 						<mat-label>Ficha</mat-label>
 						<input matInput formControlName="card">
 					</mat-form-field>
