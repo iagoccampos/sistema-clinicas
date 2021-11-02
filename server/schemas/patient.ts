@@ -13,6 +13,7 @@ export interface INewPatient {
 	name: string
 	birthday?: Date
 	rg?: string
+	cpf?: string
 }
 
 const patientSchema = new Schema<IPatient>({
@@ -36,7 +37,8 @@ const patientSchema = new Schema<IPatient>({
 	clinic: {
 		type: Schema.Types.ObjectId,
 		ref: 'Clinic',
-		required: true
+		required: true,
+		immutable: true
 	}
 }, {
 	timestamps: true,
