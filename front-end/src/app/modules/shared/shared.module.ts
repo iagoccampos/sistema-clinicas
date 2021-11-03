@@ -3,13 +3,9 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { NgModule } from '@angular/core'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { RouterModule } from '@angular/router'
-import { ClickOutsideDirective } from './directives/clickoutside.directive'
-import { InputNameDirective } from './directives/input-name.directive'
-import { NoValidationFeedbackDirective } from './directives/no-validation-feedback.directive'
 import { InputNumberDirective } from './directives/input-number.directive'
 import { ErrorInterceptor } from 'src/app/modules/shared/error-interceptor.service'
 import { CardPipe } from './pipes/card.pipe'
-import { InputCardDirective } from './directives/input-card.directive'
 import { InputUppercaseDirective } from './directives/input-uppercase.directive'
 import { AngularMaterialModule } from './material/material.module'
 import { FlexLayoutModule } from '@angular/flex-layout'
@@ -26,12 +22,8 @@ const modules = [
 ]
 
 const directives = [
-	ClickOutsideDirective,
 	InputUppercaseDirective,
-	InputNameDirective,
 	InputNumberDirective,
-	InputCardDirective,
-	NoValidationFeedbackDirective
 ]
 
 const pipes = [
