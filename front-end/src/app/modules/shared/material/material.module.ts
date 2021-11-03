@@ -1,9 +1,9 @@
-import { Injectable, LOCALE_ID, NgModule } from '@angular/core'
+import { Injectable, NgModule } from '@angular/core'
 import { OverlayModule } from '@angular/cdk/overlay'
 import { CdkTreeModule } from '@angular/cdk/tree'
 import { PortalModule } from '@angular/cdk/portal'
-// import { LayoutModule } from '@angular/cdk/layout'
-import { DateAdapter, MAT_DATE_LOCALE, NativeDateAdapter } from '@angular/material/core'
+import { LayoutModule } from '@angular/cdk/layout'
+import { DateAdapter, NativeDateAdapter } from '@angular/material/core'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatButtonModule } from '@angular/material/button'
 import { MatButtonToggleModule } from '@angular/material/button-toggle'
@@ -40,7 +40,7 @@ const materialModules = [
 	OverlayModule,
 	CdkTreeModule,
 	PortalModule,
-	// LayoutModule,
+	LayoutModule,
 	MatAutocompleteModule,
 	MatButtonModule,
 	MatCardModule,

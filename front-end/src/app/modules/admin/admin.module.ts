@@ -5,8 +5,6 @@ import { ClinicsComponent } from './clinics/clinics.component'
 import { SharedModule } from '../shared/shared.module'
 import { ClinicComponent } from './clinic/clinic.component'
 import { SidenavComponent } from './clinic/sidenav/sidenav.component'
-import { LayoutModule } from '@angular/cdk/layout'
-import { AngularMaterialModule } from '../shared/material/material.module'
 import { OverviewComponent } from './clinic/overview/overview.component'
 import { NavbarComponent } from './navbar/navbar.component'
 import { PatientComponent } from './clinic/clinical/patient/patient.component'
@@ -23,6 +21,6 @@ import { NavListItemComponent } from './clinic/sidenav/nav-list-item/nav-list-it
 		PatientComponent,
 		NavListItemComponent
 	],
-	imports: [CommonModule, SharedModule, AngularMaterialModule, LayoutModule]
+	imports: [CommonModule, SharedModule]
 })
 export class AdminModule { }
