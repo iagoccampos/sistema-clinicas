@@ -1,6 +1,6 @@
 import { trigger, state, style, transition, animate } from '@angular/animations'
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core'
-import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms'
 import { MatPaginator, PageEvent } from '@angular/material/paginator'
 import { MatTableDataSource } from '@angular/material/table'
 import { ActivatedRoute } from '@angular/router'
@@ -27,7 +27,8 @@ export class PatientComponent implements OnInit, AfterViewInit {
 		name: new FormControl('', [Validators.required, Validators.maxLength(40)]),
 		birthday: new FormControl(''),
 		rg: new FormControl(''),
-		cpf: new FormControl('')
+		cpf: new FormControl(''),
+		phones: new FormArray([new FormControl(), new FormControl(), new FormControl()])
 	})
 
 	findPatientsForm = new FormGroup({
@@ -60,6 +61,10 @@ export class PatientComponent implements OnInit, AfterViewInit {
 	addNewPatient() {
 		this.patientService.createPatient(this.newPatientForm.value, this.clinicId)
 			.subscribe()
+	}
+
+	get phonesControl() {
+		return (this.newPatientForm.get('phones') as FormArray).controls
 	}
 
 	getPatients() {

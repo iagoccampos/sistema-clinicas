@@ -6,6 +6,7 @@ export interface IPatient {
 	birthday?: Date
 	rg?: string
 	cpf?: string
+	phones?: string[]
 	clinic: Schema.Types.ObjectId | string
 }
 
@@ -14,6 +15,7 @@ export interface INewPatient {
 	birthday?: Date
 	rg?: string
 	cpf?: string
+	phones?: string[]
 }
 
 const patientSchema = new Schema<IPatient>({
@@ -33,6 +35,15 @@ const patientSchema = new Schema<IPatient>({
 	},
 	cpf: {
 		type: String
+	},
+	phones: {
+		type: [{
+			type: String,
+			trim: true
+		}],
+		set: (val: string[]) => {
+			return val.filter(el => !!el).slice(0, 3)
+		}
 	},
 	clinic: {
 		type: Schema.Types.ObjectId,

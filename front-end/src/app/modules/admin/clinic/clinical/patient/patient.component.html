@@ -41,6 +41,18 @@
 				</div>
 			</div>
 
+			<div fxLayout="row" fxLayoutGap="16px">
+				<div fxLayout="column" fxFlex="20" fxLayoutGap="0px" formArrayName="phones">
+					<h3>Telefones:</h3>
+					<div *ngFor="let phones of phonesControl; let i = index">
+						<mat-form-field>
+							<mat-label>Telefone {{ i + 1 }}</mat-label>
+							<input matInput [formControlName]="i">
+						</mat-form-field>
+					</div>
+				</div>
+			</div>
+
 			<button mat-flat-button color="primary" [disabled]="newPatientForm.invalid">Adicionar</button>
 		</form>
 	</mat-expansion-panel>

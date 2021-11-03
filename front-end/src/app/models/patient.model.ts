@@ -1,7 +1,9 @@
 export interface NewPatient {
 	name: string
-	rg?: string
 	birthday?: string
+	rg?: string
+	cpf?: string
+	phones?: string[]
 }
 
 export interface Patient {
@@ -11,4 +13,6 @@ export interface Patient {
 	rg?: string
 	cpf?: string
 	birthday?: Date
+	phones: string[]
+	clinic: string
 }
