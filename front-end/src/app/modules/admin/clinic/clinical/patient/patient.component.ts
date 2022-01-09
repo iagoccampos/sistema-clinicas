@@ -28,7 +28,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
 		birthday: new FormControl(''),
 		rg: new FormControl(''),
 		cpf: new FormControl(''),
-		phones: new FormArray([new FormControl(), new FormControl(), new FormControl()])
+		phones: new FormArray([new FormControl()])
 	})
 
 	findPatientsForm = new FormGroup({
@@ -64,14 +64,21 @@ export class PatientComponent implements OnInit, AfterViewInit {
 	}
 
 	get phonesControl() {
-		return (this.newPatientForm.get('phones') as FormArray).controls
+		return (this.newPatientForm.get('phones') as FormArray)
+	}
+
+	addPhone() {
+		this.phonesControl.push(new FormControl())
+	}
+
+	removePhone(index: number) {
+		this.phonesControl.removeAt(index)
 	}
 
 	getPatients() {
-		this.patientService.getPatients(this.clinicId, this.findPatientsForm.value, this.paginator.pageIndex, this.paginator.pageSize)
-			.subscribe((data) => {
-				this.paginator.length = data.total
-				this.dataSource.data = data.items
-			})
+		this.patientService.getPatients(this.clinicId, this.findPatientsForm.value, this.paginator.pageIndex, this.paginator.pageSize).subscribe((data) => {
+			this.paginator.length = data.total
+			this.dataSource.data = data.items
+		})
 	}
 }
