@@ -11,6 +11,8 @@ import { AngularMaterialModule } from './material/material.module'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { RgPipe } from './pipes/rg.pipe'
 import { CpfPipe } from './pipes/cpf.pipe'
+import { InputDateMaskDirective } from './directives/input-date-mask.directive'
+import { MaskDirective } from './directives/mask.directive'
 
 const modules = [
 	CommonModule,
@@ -24,6 +26,8 @@ const modules = [
 const directives = [
 	InputUppercaseDirective,
 	InputNumberDirective,
+	InputDateMaskDirective,
+	MaskDirective,
 ]
 
 const pipes = [
