@@ -1,4 +1,5 @@
 @use "~@angular/material" as mat;
+@use "~@angular/cdk";
 
 @include mat.core();
 
@@ -46,4 +47,32 @@ mat-panel-title {
 	span:first-of-type {
 		padding-right: 8px;
 	}
+}
+
+// Scrollbar
+
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+	background: #999;
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #666;
+}
+
+// Set custom autofill inputs to have no background and red text.
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	transition: background-color 5000s ease-in-out 0s;
+	-webkit-text-fill-color: #fff !important;
 }
