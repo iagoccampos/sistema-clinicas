@@ -12,7 +12,6 @@ export class RgPipe implements PipeTransform {
 		}
 
 		const text = value.replace(/[^\d]/g, '')
-		console.log(value, text)
 		return [text.substring(0, 1), text.substring(1, 4), text.substring(4)]
 			.filter((el) => el)
 			.join('.')
