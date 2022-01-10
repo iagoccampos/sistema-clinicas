@@ -4,6 +4,7 @@ interface Query {
 	name?: string
 	birthday?: string
 	rg?: string
+	cpf?: string
 	page?: string
 	limit?: string
 }
@@ -12,6 +13,7 @@ interface MappedQuery {
 	name?: string | RegExp
 	birthday?: Date
 	rg?: string
+	cpf?: string
 }
 
 class PatientModel {
@@ -31,6 +33,10 @@ class PatientModel {
 
 		if (query.rg) {
 			mappedQuery.rg = query.rg
+		}
+
+		if (query.cpf) {
+			mappedQuery.cpf = query.cpf
 		}
 
 		const total = await Patient.find({ clinic: clinicId, ...mappedQuery }).countDocuments().exec()

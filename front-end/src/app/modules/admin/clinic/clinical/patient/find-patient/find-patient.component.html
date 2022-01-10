@@ -14,10 +14,19 @@
 				<mat-datepicker #picker2></mat-datepicker>
 			</mat-form-field>
 		</div>
+
+	</div>
+	<div fxLayout="row" fxLayoutGap="16px">
 		<div fxFlex>
 			<mat-form-field>
 				<mat-label>RG</mat-label>
-				<input matInput formControlName="rg">
+				<input matInput appMask="0.000.000" formControlName="rg">
+			</mat-form-field>
+		</div>
+		<div fxFlex>
+			<mat-form-field>
+				<mat-label>CPF</mat-label>
+				<input matInput appMask="000.000.000-00" formControlName="cpf">
 			</mat-form-field>
 		</div>
 		<div fxFlex>
@@ -27,7 +36,6 @@
 			</mat-form-field>
 		</div>
 	</div>
-
 	<button mat-flat-button color="primary" [disabled]="findPatientsForm.invalid">Procurar</button>
 </form>
 

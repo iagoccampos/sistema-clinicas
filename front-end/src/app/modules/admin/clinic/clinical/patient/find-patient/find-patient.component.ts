@@ -27,6 +27,7 @@ export class FindPatientComponent implements OnInit, AfterViewInit {
 		name: new FormControl('', [Validators.maxLength(40)]),
 		birthday: new FormControl(''),
 		rg: new FormControl(''),
+		cpf: new FormControl(''),
 		card: new FormControl('')
 	})
 
