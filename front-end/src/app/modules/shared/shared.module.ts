@@ -13,6 +13,7 @@ import { RgPipe } from './pipes/rg.pipe'
 import { CpfPipe } from './pipes/cpf.pipe'
 import { InputDateMaskDirective } from './directives/input-date-mask.directive'
 import { MaskDirective } from './directives/mask.directive'
+import { PhonePipe } from './pipes/phone.pipe'
 
 const modules = [
 	CommonModule,
@@ -33,7 +34,8 @@ const directives = [
 const pipes = [
 	CardPipe,
 	RgPipe,
-	CpfPipe
+	CpfPipe,
+	PhonePipe
 ]
 
 @NgModule({

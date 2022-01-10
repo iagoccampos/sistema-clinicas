@@ -8,7 +8,9 @@ import { SidenavComponent } from './clinic/sidenav/sidenav.component'
 import { OverviewComponent } from './clinic/overview/overview.component'
 import { NavbarComponent } from './navbar/navbar.component'
 import { PatientComponent } from './clinic/clinical/patient/patient.component'
-import { NavListItemComponent } from './clinic/sidenav/nav-list-item/nav-list-item.component'
+import { NavListItemComponent } from './clinic/sidenav/nav-list-item/nav-list-item.component';
+import { NewPatientComponent } from './clinic/clinical/patient/new-patient/new-patient.component';
+import { FindPatientComponent } from './clinic/clinical/patient/find-patient/find-patient.component'
 
 @NgModule({
 	declarations: [
@@ -19,7 +21,9 @@ import { NavListItemComponent } from './clinic/sidenav/nav-list-item/nav-list-it
 		OverviewComponent,
 		NavbarComponent,
 		PatientComponent,
-		NavListItemComponent
+		NavListItemComponent,
+  NewPatientComponent,
+  FindPatientComponent
 	],
 	imports: [CommonModule, SharedModule]
 })

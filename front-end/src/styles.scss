@@ -35,6 +35,31 @@ div.container {
 	padding: 20px;
 }
 
+// Table
+table {
+	width: 100%;
+}
+
+.table-container {
+	position: relative;
+	max-height: 400px;
+	overflow: auto;
+	margin-top: 15px;
+}
+
+.table-row-detail {
+	overflow: hidden;
+	display: flex;
+}
+
+tr.detail-row {
+	height: 0;
+}
+
+.element-row td {
+	border-bottom-width: 0px;
+}
+
 // Formfields tem largura fixa
 mat-form-field {
 	width: 100%;

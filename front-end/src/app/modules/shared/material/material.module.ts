@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
 import { MatListModule } from '@angular/material/list'
 import { MatMenuModule } from '@angular/material/menu'
-import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator'
+import { MatPaginatorIntl, MatPaginatorModule, MAT_PAGINATOR_DEFAULT_OPTIONS } from '@angular/material/paginator'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatSelectModule } from '@angular/material/select'
 import { MatSidenavModule } from '@angular/material/sidenav'
@@ -113,6 +113,11 @@ class CustomDateAdapter extends NativeDateAdapter {
 		{ provide: DateAdapter, useClass: CustomDateAdapter },
 		{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
 		{ provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3000 } },
+		{
+			provide: MAT_PAGINATOR_DEFAULT_OPTIONS, useValue: {
+				pageSizeOptions: [10, 25, 100], showFirstLastButtons: true, formFieldAppearance: 'standard'
+			}
+		},
 		{
 			provide: MatPaginatorIntl,
 			useValue: (() => {

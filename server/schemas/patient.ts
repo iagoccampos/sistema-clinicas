@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose'
+import { removeSpecialChar } from '../util/util'
 
 export interface IPatient {
 	card: number
@@ -31,18 +32,21 @@ const patientSchema = new Schema<IPatient>({
 		type: Date
 	},
 	rg: {
-		type: String
+		type: String,
+		set: removeSpecialChar
 	},
 	cpf: {
-		type: String
+		type: String,
+		set: removeSpecialChar
 	},
 	phones: {
 		type: [{
 			type: String,
-			trim: true
+			trim: true,
+			set: removeSpecialChar
 		}],
 		set: (val: string[]) => {
-			return val.filter(el => !!el).slice(0, 3)
+			return val.filter(el => !!el).slice(0, 5)
 		}
 	},
 	clinic: {

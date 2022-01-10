@@ -34,7 +34,7 @@ export class MaskDirective implements OnInit {
 	}
 
 	@HostListener('keypress', ['$event']) onKeydownHandler(event: KeyboardEvent) {
-		if (event.ctrlKey) {
+		if (event.ctrlKey || event.code === 'Enter') {
 			return
 		}
 

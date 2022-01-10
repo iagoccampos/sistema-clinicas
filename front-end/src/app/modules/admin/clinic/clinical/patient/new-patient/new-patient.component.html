@@ -1,0 +1,52 @@
+<form [formGroup]="newPatientForm" (ngSubmit)="addNewPatient()" autocomplete="off">
+	<div fxLayout="row" fxLayoutGap="16px">
+		<div fxFlex>
+			<mat-form-field>
+				<mat-label>Nome Completo</mat-label>
+				<input matInput formControlName="name" maxlength="40">
+			</mat-form-field>
+		</div>
+		<div fxFlex>
+			<mat-form-field>
+				<mat-label>Data de nascimento</mat-label>
+				<input matInput appMask="00/00/0000" [matDatepicker]="picker" formControlName="birthday">
+				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
+			</mat-form-field>
+		</div>
+		<div fxFlex>
+			<mat-form-field>
+				<mat-label>RG</mat-label>
+				<input matInput appMask="0.000.000" formControlName="rg">
+			</mat-form-field>
+		</div>
+		<div fxFlex>
+			<mat-form-field>
+				<mat-label>CPF</mat-label>
+				<input appMask="000.000.000-00" matInput formControlName="cpf">
+			</mat-form-field>
+		</div>
+	</div>
+
+	<div fxLayout="row" fxLayoutGap="16px">
+		<div fxLayout="column" fxFlex="25" fxLayoutGap="0px" formArrayName="phones">
+			<h3>Telefones:</h3>
+			<div *ngFor="let phones of phonesControl.controls; let i = index;">
+				<mat-form-field>
+					<mat-label>Telefone {{ i + 1 }}</mat-label>
+					<input matInput appMask="(00) 00000-0000" [formControlName]="i">
+					<button *ngIf="phonesControl.controls.length > 1" type="button" mat-icon-button matSuffix
+						(click)="removePhone(i)">
+						<mat-icon>remove</mat-icon>
+					</button>
+					<button *ngIf="phonesControl.controls.length < 5" type="button" mat-icon-button matSuffix
+						(click)="addPhone()">
+						<mat-icon>add</mat-icon>
+					</button>
+				</mat-form-field>
+			</div>
+		</div>
+	</div>
+
+	<button mat-flat-button color="primary" [disabled]="newPatientForm.invalid">Adicionar</button>
+</form>
