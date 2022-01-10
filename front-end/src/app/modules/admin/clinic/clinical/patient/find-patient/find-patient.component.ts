@@ -19,9 +19,9 @@ import { PatientService } from 'src/app/services/patient.service'
 		])
 	]
 })
-export class FindPatientComponent implements OnInit, AfterViewInit {
+export class FindPatientComponent implements AfterViewInit {
 
-	private clinicId = ''
+	private readonly clinicId: string
 
 	findPatientsForm = new FormGroup({
 		name: new FormControl('', [Validators.maxLength(40)]),
@@ -37,9 +37,7 @@ export class FindPatientComponent implements OnInit, AfterViewInit {
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator
 
-	constructor(private patientService: PatientService, private router: ActivatedRoute) { }
-
-	ngOnInit(): void {
+	constructor(private patientService: PatientService, private router: ActivatedRoute) {
 		this.clinicId = this.router.snapshot.paramMap.get('clinicId') as string
 	}
 

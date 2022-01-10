@@ -8,9 +8,9 @@ import { PatientService } from 'src/app/services/patient.service'
 	templateUrl: './new-patient.component.html',
 	styleUrls: ['./new-patient.component.scss']
 })
-export class NewPatientComponent implements OnInit {
+export class NewPatientComponent {
 
-	private clinicId = ''
+	private readonly clinicId: string
 
 	newPatientForm = new FormGroup({
 		name: new FormControl('', [Validators.required, Validators.maxLength(40)]),
@@ -20,9 +20,7 @@ export class NewPatientComponent implements OnInit {
 		phones: new FormArray([new FormControl()])
 	})
 
-	constructor(private patientService: PatientService, private router: ActivatedRoute) { }
-
-	ngOnInit() {
+	constructor(private patientService: PatientService, private router: ActivatedRoute) {
 		this.clinicId = this.router.snapshot.paramMap.get('clinicId') as string
 	}
 
