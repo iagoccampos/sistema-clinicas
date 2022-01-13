@@ -22,7 +22,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 						break
 				}
 
-				console.log(err)
+				console.error(err)
 				return throwError(err.error.message)
 			})
 		)

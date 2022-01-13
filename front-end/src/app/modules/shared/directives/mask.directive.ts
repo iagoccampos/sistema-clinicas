@@ -59,7 +59,6 @@ export class MaskDirective implements OnInit {
 			}
 
 			elRef.value += maskChar
-			console.log(maskChar)
 			currentInputIndex++
 			maskChar = this.appMask[currentInputIndex]
 		}
@@ -71,7 +70,6 @@ export class MaskDirective implements OnInit {
 
 	@HostListener('paste', ['$event'])
 	onPaste(event: ClipboardEvent) {
-		console.log('paste')
 		const clipText = (event.clipboardData?.getData('text') || '').replace(specialCharRegex, '')
 		let text = ''
 
