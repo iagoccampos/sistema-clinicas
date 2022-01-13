@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core'
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms'
+import { Component, ViewChild } from '@angular/core'
+import { FormGroup, FormControl, Validators, FormArray, FormGroupDirective } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { PatientService } from 'src/app/services/patient.service'
+import { resetForm } from 'src/util/util'
 
 @Component({
 	selector: 'app-new-patient',
@@ -12,16 +13,19 @@ export class NewPatientComponent {
 
 	private readonly clinicId: string
 
+	private readonly defaultValues
+
 	newPatientForm = new FormGroup({
 		name: new FormControl('', [Validators.required, Validators.maxLength(40)]),
 		birthday: new FormControl(''),
 		rg: new FormControl(''),
 		cpf: new FormControl(''),
-		phones: new FormArray([new FormControl()])
+		phones: new FormArray([new FormControl('')])
 	})
 
 	constructor(private patientService: PatientService, private router: ActivatedRoute) {
 		this.clinicId = this.router.snapshot.paramMap.get('clinicId') as string
+		this.defaultValues = this.newPatientForm.value
 	}
 
 	get phonesControl() {
@@ -41,6 +45,8 @@ export class NewPatientComponent {
 	}
 
 	addNewPatient() {
-		this.patientService.createPatient(this.newPatientForm.value, this.clinicId).subscribe()
+		this.patientService.createPatient(this.newPatientForm.value, this.clinicId).subscribe(() => {
+			resetForm(this.newPatientForm, this.defaultValues)
+		})
 	}
 }
