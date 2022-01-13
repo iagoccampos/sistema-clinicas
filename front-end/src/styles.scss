@@ -4,15 +4,15 @@
 @include mat.core();
 
 $app-primary: mat.define-palette(mat.$purple-palette, 500);
-$app-warn: mat.define-palette(mat.$yellow-palette, A700);
 $app-accent: mat.define-palette(mat.$green-palette, A200, A100, A400);
+//$app-warn: mat.define-palette(mat.$yellow-palette, A700);
 
 $app-theme: mat.define-dark-theme(
 	(
 		color: (
 			primary: $app-primary,
 			accent: $app-accent,
-			warn: $app-warn,
+			//warn: $app-warn,
 		),
 	)
 );
