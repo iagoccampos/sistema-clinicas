@@ -11,9 +11,9 @@ import { resetForm } from 'src/util/util'
 })
 export class NewPatientComponent {
 
-	private readonly clinicId: string
+	private readonly clinicId
 
-	private readonly defaultValues
+	private readonly initialValues
 
 	newPatientForm = new FormGroup({
 		name: new FormControl('', [Validators.required, Validators.maxLength(40)]),
@@ -25,7 +25,7 @@ export class NewPatientComponent {
 
 	constructor(private patientService: PatientService, private router: ActivatedRoute) {
 		this.clinicId = this.router.snapshot.paramMap.get('clinicId') as string
-		this.defaultValues = this.newPatientForm.value
+		this.initialValues = this.newPatientForm.value
 	}
 
 	get phonesControl() {
@@ -46,7 +46,7 @@ export class NewPatientComponent {
 
 	addNewPatient() {
 		this.patientService.createPatient(this.newPatientForm.value, this.clinicId).subscribe(() => {
-			resetForm(this.newPatientForm, this.defaultValues)
+			resetForm(this.newPatientForm, this.initialValues)
 		})
 	}
 }

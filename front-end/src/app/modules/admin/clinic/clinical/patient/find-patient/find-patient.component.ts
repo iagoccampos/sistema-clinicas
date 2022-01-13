@@ -4,8 +4,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatPaginator, PageEvent } from '@angular/material/paginator'
 import { MatTableDataSource } from '@angular/material/table'
 import { ActivatedRoute } from '@angular/router'
+import { interval } from 'rxjs'
+import { debounce } from 'rxjs/operators'
 import { Patient } from 'src/app/models/patient.model'
 import { PatientService } from 'src/app/services/patient.service'
+import { resetForm } from 'src/util/util'
 
 @Component({
 	selector: 'app-find-patient',
@@ -21,7 +24,8 @@ import { PatientService } from 'src/app/services/patient.service'
 })
 export class FindPatientComponent implements AfterViewInit {
 
-	private readonly clinicId: string
+	private readonly clinicId
+	private readonly initialValues
 
 	findPatientsForm = new FormGroup({
 		name: new FormControl('', [Validators.maxLength(40)]),
@@ -39,6 +43,7 @@ export class FindPatientComponent implements AfterViewInit {
 
 	constructor(private patientService: PatientService, private router: ActivatedRoute) {
 		this.clinicId = this.router.snapshot.paramMap.get('clinicId') as string
+		this.initialValues = this.findPatientsForm.value
 	}
 
 	ngAfterViewInit() {
@@ -47,9 +52,16 @@ export class FindPatientComponent implements AfterViewInit {
 		this.paginator.page.subscribe((el: PageEvent) => {
 			this.getPatients()
 		})
+
+		this.findPatientsForm.valueChanges.pipe(debounce(() => interval(1000))).subscribe(() => { this.getPatients() })
 	}
 
-	getPatients() {
+	clearForm() {
+		resetForm(this.findPatientsForm, this.initialValues, false)
+		this.getPatients()
+	}
+
+	private getPatients() {
 		this.patientService.getPatients(this.clinicId, this.findPatientsForm.value, this.paginator.pageIndex, this.paginator.pageSize)
 			.subscribe((data) => {
 				this.paginator.length = data.total
