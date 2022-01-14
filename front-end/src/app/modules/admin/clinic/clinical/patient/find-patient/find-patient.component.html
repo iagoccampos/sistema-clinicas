@@ -73,7 +73,7 @@
 					<div class="table-row-detail"
 						[@detailExpand]="element == expandedPatient ? 'expanded' : 'collapsed'">
 						<div>
-							<p>Telefones:</p>
+							<p>Telefones: <span *ngIf="!element.phones.length">Nenhum telefone cadastrado</span></p>
 							<ul>
 								<li *ngFor="let phone of element.phones">{{ phone | phone }}</li>
 							</ul>
