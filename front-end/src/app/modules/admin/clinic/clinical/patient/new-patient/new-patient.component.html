@@ -1,4 +1,4 @@
-<form [formGroup]="newPatientForm" (ngSubmit)="addNewPatient()" autocomplete="off">
+<form [formGroup]="patientForm" (ngSubmit)="submit()" autocomplete="off">
 	<div fxLayout="row" fxLayoutGap="16px">
 		<div fxFlex>
 			<mat-form-field>
@@ -48,5 +48,10 @@
 		</div>
 	</div>
 
-	<button mat-flat-button color="primary" [disabled]="newPatientForm.invalid">Adicionar</button>
+	<div fxLayout fxLayoutGap="8px">
+		<button *ngIf="!patientId" mat-flat-button color="primary" [disabled]="patientForm.invalid">Adicionar</button>
+		<button *ngIf="patientId" mat-flat-button color="primary" [disabled]="patientForm.invalid">Editar</button>
+		<button type="button" *ngIf="patientId" mat-flat-button color="warn" (click)="clearForm()">Cancelar</button>
+	</div>
+
 </form>

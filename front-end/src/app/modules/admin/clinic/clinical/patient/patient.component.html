@@ -1,13 +1,13 @@
 <h1>Pacientes: Clínico</h1>
 <hr>
 <mat-accordion multi>
-	<mat-expansion-panel>
+	<mat-expansion-panel #patientPanel>
 		<mat-expansion-panel-header>
 			<mat-panel-title>
 				<span class="material-icons">
-					person_add
+					{{ editingPatient ? 'edit' : 'person_add'}}
 				</span>
-				Adicionar Paciente
+				{{ editingPatient ? 'Editar' : 'Adicionar'}} Paciente
 			</mat-panel-title>
 		</mat-expansion-panel-header>
 		<app-new-patient></app-new-patient>

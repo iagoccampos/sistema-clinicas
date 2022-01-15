@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { tap } from 'rxjs/operators'
 import { NewPatient, Patient } from '../models/patient.model'
@@ -22,7 +22,13 @@ export class PatientService {
 		}))
 	}
 
-	private generateUrl(clinicId: string) {
-		return `/api/clinic/${clinicId}/patient`
+	editPatient(patient: Patient, clinicId: string, patientId: string) {
+		return this.http.put<Patient>(this.generateUrl(clinicId, patientId), patient).pipe(tap(() => {
+			this.snackbarService.success('Paciente editado com sucesso.')
+		}))
+	}
+
+	private generateUrl(clinicId: string, patientId?: string) {
+		return `/api/clinic/${clinicId}/patient${patientId ? `/${patientId}` : ''}`
 	}
 }

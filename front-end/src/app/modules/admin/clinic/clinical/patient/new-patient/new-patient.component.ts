@@ -1,8 +1,9 @@
-import { Component, ViewChild } from '@angular/core'
+import { Component } from '@angular/core'
 import { FormGroup, FormControl, Validators, FormArray, FormGroupDirective } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { PatientService } from 'src/app/services/patient.service'
 import { resetForm } from 'src/util/util'
+import { SharedService } from '../shared.service'
 
 @Component({
 	selector: 'app-new-patient',
@@ -15,7 +16,9 @@ export class NewPatientComponent {
 
 	private readonly initialValues
 
-	newPatientForm = new FormGroup({
+	patientId = ''
+
+	patientForm = new FormGroup({
 		name: new FormControl('', [Validators.required, Validators.maxLength(40)]),
 		birthday: new FormControl(''),
 		rg: new FormControl(''),
@@ -23,13 +26,20 @@ export class NewPatientComponent {
 		phones: new FormArray([new FormControl('')])
 	})
 
-	constructor(private patientService: PatientService, private router: ActivatedRoute) {
+	constructor(private patientService: PatientService, private router: ActivatedRoute, private sharedService: SharedService) {
 		this.clinicId = this.router.snapshot.paramMap.get('clinicId') as string
-		this.initialValues = this.newPatientForm.value
+		this.initialValues = this.patientForm.value
+
+		sharedService.onModeChange.subscribe((patient) => {
+			if (patient) {
+				this.patientId = patient._id
+				this.patientForm.patchValue(patient, { onlySelf: false })
+			}
+		})
 	}
 
 	get phonesControl() {
-		return (this.newPatientForm.get('phones') as FormArray)
+		return (this.patientForm.get('phones') as FormArray)
 	}
 
 	addPhone() {
@@ -44,9 +54,21 @@ export class NewPatientComponent {
 		this.phonesControl.removeAt(index)
 	}
 
-	addNewPatient() {
-		this.patientService.createPatient(this.newPatientForm.value, this.clinicId).subscribe(() => {
-			resetForm(this.newPatientForm, this.initialValues)
-		})
+	submit() {
+		if (this.patientId) {
+			this.patientService.editPatient(this.patientForm.value, this.clinicId, this.patientId).subscribe(() => {
+				this.clearForm()
+			})
+		} else {
+			this.patientService.createPatient(this.patientForm.value, this.clinicId).subscribe(() => {
+				this.clearForm()
+			})
+		}
+	}
+
+	clearForm() {
+		this.patientId = ''
+		this.sharedService.editPatient(null)
+		resetForm(this.patientForm, this.initialValues)
 	}
 }

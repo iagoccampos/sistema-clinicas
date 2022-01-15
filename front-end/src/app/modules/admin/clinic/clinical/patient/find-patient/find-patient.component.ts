@@ -9,6 +9,7 @@ import { debounce } from 'rxjs/operators'
 import { Patient } from 'src/app/models/patient.model'
 import { PatientService } from 'src/app/services/patient.service'
 import { resetForm } from 'src/util/util'
+import { SharedService } from '../shared.service'
 
 @Component({
 	selector: 'app-find-patient',
@@ -41,7 +42,7 @@ export class FindPatientComponent implements AfterViewInit {
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator
 
-	constructor(private patientService: PatientService, private router: ActivatedRoute) {
+	constructor(private patientService: PatientService, private router: ActivatedRoute, private sharedService: SharedService) {
 		this.clinicId = this.router.snapshot.paramMap.get('clinicId') as string
 		this.initialValues = this.findPatientsForm.value
 	}
@@ -59,6 +60,10 @@ export class FindPatientComponent implements AfterViewInit {
 	clearForm() {
 		resetForm(this.findPatientsForm, this.initialValues, false)
 		this.getPatients()
+	}
+
+	editPatient(patient: Patient) {
+		this.sharedService.editPatient(patient)
 	}
 
 	private getPatients() {
