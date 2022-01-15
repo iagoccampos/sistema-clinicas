@@ -1,4 +1,5 @@
 import { Directive, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core'
+import { FormControl, NgControl } from '@angular/forms'
 
 const timeMasks: string[] = ['Hh:m0:s0', 'Hh:m0', 'm0:s0']
 
@@ -26,17 +27,33 @@ export class MaskDirective implements OnInit {
 	@Input() appMask = ''
 
 	private oldValue = ''
+	private keyPressed = false
 
-	constructor(private elRef: ElementRef, private renderer: Renderer2) { }
+	constructor(private elRef: ElementRef, private renderer: Renderer2, private formControl: NgControl) { }
 
 	ngOnInit(): void {
 		this.oldValue = this.elRef.nativeElement.value
+		this.formControl?.valueChanges?.subscribe((val: string) => {
+			if (this.keyPressed) {
+				this.keyPressed = false
+				return
+			}
+
+			if (!isNaN(Date.parse(val))) {
+				val = new Date(val).toLocaleDateString().replace(/\//g, '')
+			}
+
+			const text = this.build(val)
+			this.updateValue(text)
+		})
 	}
 
 	@HostListener('keypress', ['$event']) onKeydownHandler(event: KeyboardEvent) {
 		if (event.ctrlKey || event.code === 'Enter') {
 			return
 		}
+
+		this.keyPressed = true
 
 		const elRef = this.elRef.nativeElement as HTMLInputElement
 		const newInputValue = elRef.value + event.key
@@ -71,64 +88,31 @@ export class MaskDirective implements OnInit {
 	@HostListener('paste', ['$event'])
 	onPaste(event: ClipboardEvent) {
 		const clipText = (event.clipboardData?.getData('text') || '').replace(specialCharRegex, '')
-		let text = ''
-
-		let clipTextIndex = 0
-		for (let i = 0; i < this.appMask.length; i++) {
-			if (this.isSpecialChar(this.appMask[i])) {
-				text += this.appMask[i]
-			} else {
-				text += clipText[clipTextIndex]
-				clipTextIndex++
-			}
-		}
+		const text = this.build(clipText)
 
 		this.updateValue(text)
 		event.preventDefault()
 	}
 
-	// @HostListener('input', ['$event'])
-	// onInput(event: Event) {
-	// 	const newValue = this.elRef.nativeElement.value as string
+	private build(text: string): string {
+		if (!text) {
+			return ''
+		}
 
-	// 	// Em caso de adição de caracteres ou ocorreu um paste
-	// 	if (newValue.length >= this.oldValue.length || this.pasteEvent) {
-	// 		this.updateValue(this.build(newValue))
-	// 	} else {
-	// 		// const diff = new Diff().main(this.oldValue, newValue)
-	// 		// console.log(diff)
-	// 		this.updateValue(this.build(newValue))
-	// 	}
+		let newText = ''
 
-	// 	this.pasteEvent = false
-	// }
+		let textIndex = 0
+		for (let i = 0; i < this.appMask.length; i++) {
+			if (this.isSpecialChar(this.appMask[i])) {
+				newText += this.appMask[i]
+			} else {
+				newText += text[textIndex]
+				textIndex++
+			}
+		}
 
-	// private build(text: string): string {
-	// 	let buildedText = ''
-
-	// 	for (let i = 0; i < text.length; i++) {
-	// 		const char = text.charAt(i)
-	// 		const mask = this.appMask.charAt(i)
-
-	// 		if (!mask) {
-	// 			return this.oldValue
-	// 		}
-
-	// 		if (!this.isSpecialChar(mask) && !patterns[mask].test(char)) {
-	// 			return this.oldValue
-	// 		}
-
-	// 		if (this.isSpecialChar(mask) && !this.isSpecialChar(char)) {
-	// 			buildedText += mask
-	// 			buildedText += char
-	// 			return this.build(buildedText + text.substr(buildedText.length - 1))
-	// 		}
-
-	// 		buildedText += char
-	// 	}
-
-	// 	return buildedText
-	// }
+		return newText
+	}
 
 	private isSpecialChar(char: string) {
 		return char.length === 1 && !!specialCharacters.find((el) => el === char)
