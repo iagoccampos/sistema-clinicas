@@ -7,7 +7,6 @@
 		"prefer-for-of": false,
 		"align": {
 			"options": [
-				"parameters",
 				"statements"
 			]
 		},

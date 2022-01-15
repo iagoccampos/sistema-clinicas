@@ -14,6 +14,11 @@ import { CpfPipe } from './pipes/cpf.pipe'
 import { InputDateMaskDirective } from './directives/input-date-mask.directive'
 import { MaskDirective } from './directives/mask.directive'
 import { PhonePipe } from './pipes/phone.pipe'
+import { DeleteConfirmationComponent } from './dialogs/delete-confirmation/delete-confirmation.component'
+
+const components = [
+	DeleteConfirmationComponent
+]
 
 const modules = [
 	CommonModule,
@@ -46,8 +51,9 @@ const pipes = [
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
 	],
 	declarations: [
+		...components,
 		...directives,
-		...pipes
+		...pipes,
 	],
 	exports: [
 		...modules,

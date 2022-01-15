@@ -1,12 +1,14 @@
 import { trigger, state, style, transition, animate } from '@angular/animations'
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { MatDialog } from '@angular/material/dialog'
 import { MatPaginator, PageEvent } from '@angular/material/paginator'
 import { MatTableDataSource } from '@angular/material/table'
 import { ActivatedRoute } from '@angular/router'
 import { interval } from 'rxjs'
-import { debounce } from 'rxjs/operators'
+import { debounce, delay } from 'rxjs/operators'
 import { Patient } from 'src/app/models/patient.model'
+import { DialogService } from 'src/app/services/dialog.service'
 import { PatientService } from 'src/app/services/patient.service'
 import { resetForm } from 'src/util/util'
 import { SharedService } from '../shared.service'
@@ -42,7 +44,8 @@ export class FindPatientComponent implements AfterViewInit {
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator
 
-	constructor(private patientService: PatientService, private router: ActivatedRoute, private sharedService: SharedService) {
+	constructor(private patientService: PatientService, private router: ActivatedRoute, private sharedService: SharedService,
+		private dialogService: DialogService) {
 		this.clinicId = this.router.snapshot.paramMap.get('clinicId') as string
 		this.initialValues = this.findPatientsForm.value
 	}
@@ -50,7 +53,7 @@ export class FindPatientComponent implements AfterViewInit {
 	ngAfterViewInit() {
 		this.getPatients()
 
-		this.paginator.page.subscribe((el: PageEvent) => {
+		this.paginator.page.subscribe(() => {
 			this.getPatients()
 		})
 
@@ -64,6 +67,16 @@ export class FindPatientComponent implements AfterViewInit {
 
 	editPatient(patient: Patient) {
 		this.sharedService.editPatient(patient)
+	}
+
+	deletePatient(patientId: string) {
+		this.dialogService.openDeleteConfirmationDialog().afterClosed().subscribe((result) => {
+			if (result) {
+				this.patientService.deletePatient(this.clinicId, patientId).subscribe(() => {
+					this.getPatients()
+				})
+			}
+		})
 	}
 
 	private getPatients() {

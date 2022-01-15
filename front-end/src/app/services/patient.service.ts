@@ -28,6 +28,12 @@ export class PatientService {
 		}))
 	}
 
+	deletePatient(clinicId: string, patientId: string) {
+		return this.http.delete(this.generateUrl(clinicId, patientId)).pipe(tap(() => {
+			this.snackbarService.success('Paciente deletado com sucesso.')
+		}))
+	}
+
 	private generateUrl(clinicId: string, patientId?: string) {
 		return `/api/clinic/${clinicId}/patient${patientId ? `/${patientId}` : ''}`
 	}
