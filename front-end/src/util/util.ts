@@ -1,8 +1,9 @@
-import { FormGroup } from '@angular/forms'
+import { FormGroup, FormGroupDirective } from '@angular/forms'
 
-export function resetForm(form: FormGroup, defaultValues: any, emit = true) {
-	form.patchValue(defaultValues, { emitEvent: emit })
-	Object.keys(form.controls).forEach((key) => {
-		form.controls[key].setErrors(null)
-	})
+export function resetForm(form: FormGroupDirective | FormGroup, defaultValues: any, emitEvent = true) {
+	if (form instanceof FormGroupDirective) {
+		return form.resetForm(defaultValues)
+	}
+
+	form.reset(defaultValues, { emitEvent })
 }

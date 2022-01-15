@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, ViewChild } from '@angular/core'
 import { FormGroup, FormControl, Validators, FormArray, FormGroupDirective } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { PatientService } from 'src/app/services/patient.service'
@@ -15,6 +15,8 @@ export class NewPatientComponent {
 	private readonly clinicId
 
 	private readonly initialValues
+
+	@ViewChild(FormGroupDirective) patientFormDirective!: FormGroupDirective
 
 	patientId = ''
 
@@ -69,6 +71,6 @@ export class NewPatientComponent {
 	clearForm() {
 		this.patientId = ''
 		this.sharedService.editPatient(null)
-		resetForm(this.patientForm, this.initialValues)
+		resetForm(this.patientFormDirective, this.initialValues)
 	}
 }
