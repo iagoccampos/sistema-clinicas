@@ -17,7 +17,7 @@ export class LoginComponent {
 
 	constructor(private authService: AuthService) { }
 
-	login(): void {
+	login() {
 		this.authService.login(this.loginForm.value)
 	}
 }
