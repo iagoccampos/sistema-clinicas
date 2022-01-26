@@ -1,6 +1,5 @@
 import { Component } from '@angular/core'
 import { MatDialogRef } from '@angular/material/dialog'
-import { PatientService } from 'src/app/services/patient.service'
 
 @Component({
 	selector: 'app-delete-confirmation',
@@ -9,7 +8,7 @@ import { PatientService } from 'src/app/services/patient.service'
 })
 export class DeleteConfirmationComponent {
 
-	constructor(private dialogRef: MatDialogRef<DeleteConfirmationComponent, boolean>, private patientService: PatientService) { }
+	constructor(private dialogRef: MatDialogRef<DeleteConfirmationComponent, boolean>) { }
 
 	confirm() {
 		this.dialogRef.close(true)
