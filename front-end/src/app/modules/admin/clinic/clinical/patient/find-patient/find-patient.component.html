@@ -70,18 +70,19 @@
 			<ng-container matColumnDef="expandedDetail">
 				<td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
 					<div class="table-row-detail"
-						[@detailExpand]="element == expandedPatient ? 'expanded' : 'collapsed' "
-						fxLayoutAlign="space-between center">
-
-						<div fxFlex>
-							<p>Telefones: <span *ngIf="!element.phones.length">Nenhum telefone cadastrado</span></p>
-							<ul>
-								<li *ngFor="let phone of element.phones">{{ phone | phone }}</li>
-							</ul>
-						</div>
-						<div fxLayoutAlign="end center" fxLayoutGap="8px">
-							<button mat-flat-button color="accent" (click)="editPatient(element)">Editar</button>
-							<button mat-flat-button color="warn" (click)="deletePatient(element._id)">Deletar</button>
+						[@detailExpand]="element == expandedPatient ? 'expanded' : 'collapsed' ">
+						<div fxFlex fxLayoutAlign="space-between center">
+							<div fxFlex>
+								<p>Telefones: <span *ngIf="!element.phones.length">Nenhum telefone cadastrado</span></p>
+								<ul>
+									<li *ngFor="let phone of element.phones">{{ phone | phone }}</li>
+								</ul>
+							</div>
+							<div fxLayoutAlign="end center" fxLayoutGap="8px">
+								<button mat-flat-button color="accent" (click)="editPatient(element)">Editar</button>
+								<button mat-flat-button color="warn"
+									(click)="deletePatient(element._id)">Deletar</button>
+							</div>
 						</div>
 					</div>
 				</td>

@@ -66,6 +66,9 @@ tr.element-row:not(.example-expanded-row):active {
 .table-row-detail {
 	overflow: hidden;
 	display: flex;
+	> div {
+		padding: 8px 0px;
+	}
 }
 
 // Formfields tem largura fixa
@@ -79,6 +82,18 @@ mat-panel-title {
 
 	span:first-of-type {
 		padding-right: 8px;
+	}
+}
+
+// Snackbar
+
+.snackbar {
+	margin-top: 70px !important;
+
+	&.snackbar-success {
+	}
+
+	&.snackbar-error {
 	}
 }
 
@@ -109,6 +124,8 @@ input:-webkit-autofill:active {
 	transition: background-color 5000s ease-in-out 0s;
 	-webkit-text-fill-color: #fff !important;
 }
+
+// Ícones do google
 
 @font-face {
 	font-family: "Material Icons";
