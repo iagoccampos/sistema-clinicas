@@ -15,9 +15,11 @@ import { InputDateMaskDirective } from './directives/input-date-mask.directive'
 import { MaskDirective } from './directives/mask.directive'
 import { PhonePipe } from './pipes/phone.pipe'
 import { DeleteConfirmationComponent } from './dialogs/delete-confirmation/delete-confirmation.component'
+import { MessageSnackbarComponent } from './snackbars/message-snackbar/message-snackbar.component'
 
 const components = [
-	DeleteConfirmationComponent
+	DeleteConfirmationComponent,
+	MessageSnackbarComponent
 ]
 
 const modules = [

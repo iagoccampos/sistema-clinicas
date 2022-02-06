@@ -3,22 +3,26 @@ import { Observable, throwError } from 'rxjs'
 import { catchError } from 'rxjs/operators'
 import { Injectable } from '@angular/core'
 import { AuthService } from '../../services/auth.service'
+import { SnackbarService } from 'src/app/services/snackbar.service'
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-	constructor(private authService: AuthService) { }
+	constructor(private authService: AuthService, private snackBarService: SnackbarService) { }
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		return next.handle(req).pipe(
 			catchError((err: HttpErrorResponse) => {
 				switch (err.status) {
 					case 401:
-						// this.notificationService.showError('Faça login para acesso.')
+						this.snackBarService.error('Faça login para acesso.')
 						this.authService.logout()
 						break
 					case 500:
-						// this.notificationService.showError('Erro interno no servidor. Tente novamente mais tarde.')
+						this.snackBarService.error('Erro interno no servidor. Tente novamente mais tarde.')
+						break
+					default:
+						this.snackBarService.error('Houve um problema na comunicação com o servidor. Tente novamente mais tarde.')
 						break
 				}
 
