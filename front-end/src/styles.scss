@@ -76,6 +76,11 @@ mat-form-field {
 	width: 100%;
 }
 
+// Altura do Mat-select
+.mat-form-field-type-mat-select .mat-form-field-flex {
+	height: 56px !important;
+}
+
 // Icone e texto ajustado no panel
 mat-panel-title {
 	align-items: center;
@@ -116,7 +121,7 @@ mat-panel-title {
 	background: #666;
 }
 
-// Set custom autofill inputs to have no background and red text.
+// Set custom autofill inputs to have no background
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
