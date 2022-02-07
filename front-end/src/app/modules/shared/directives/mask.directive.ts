@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core'
-import { FormControl, NgControl } from '@angular/forms'
+import { NgControl } from '@angular/forms'
 
 const timeMasks: string[] = ['Hh:m0:s0', 'Hh:m0', 'm0:s0']
 
@@ -26,21 +26,25 @@ const patterns: { [key: string]: RegExp } = {
 export class MaskDirective implements OnInit {
 	@Input() appMask = ''
 
-	private oldValue = ''
 	private keyPressed = false
 
 	constructor(private elRef: ElementRef, private renderer: Renderer2, private formControl: NgControl) { }
 
-	ngOnInit(): void {
-		this.oldValue = this.elRef.nativeElement.value
-		this.formControl?.valueChanges?.subscribe((val: string) => {
+	ngOnInit() {
+		this.formControl?.valueChanges?.subscribe((val: string | Date | null) => {
+			console.log(val)
 			if (this.keyPressed) {
 				this.keyPressed = false
 				return
 			}
 
-			if (!isNaN(Date.parse(val))) {
-				val = new Date(val).toLocaleDateString().replace(/\//g, '')
+			if (!val) {
+				return
+			}
+
+			// Corrigir bug
+			if (val instanceof Date) {
+				return
 			}
 
 			const text = this.build(val)
@@ -99,15 +103,22 @@ export class MaskDirective implements OnInit {
 			return ''
 		}
 
-		let newText = ''
+		const clearText = text.replace(specialCharRegex, '')
 
-		let textIndex = 0
-		for (let i = 0; i < this.appMask.length; i++) {
-			if (this.isSpecialChar(this.appMask[i])) {
-				newText += this.appMask[i]
-			} else {
-				newText += text[textIndex]
-				textIndex++
+		let newText = ''
+		let maskIndex = 0
+		for (let i = 0; i < clearText.length; i++) {
+			while (this.appMask[maskIndex] && this.isSpecialChar(this.appMask[maskIndex])) {
+				newText += this.appMask[maskIndex]
+				maskIndex++
+			}
+
+			newText += clearText[i]
+
+			maskIndex++
+
+			if (!this.appMask[maskIndex]) {
+				break
 			}
 		}
 
@@ -127,8 +138,6 @@ export class MaskDirective implements OnInit {
 	}
 
 	private updateValue(val: string) {
-		this.oldValue = val
-		// console.log(this.oldValue)
 		this.renderer.setProperty(this.elRef.nativeElement, 'value', val)
 	}
 }
