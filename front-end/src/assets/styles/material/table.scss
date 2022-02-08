@@ -1,0 +1,34 @@
+table {
+	width: 100%;
+}
+
+.table-container {
+	position: relative;
+	max-height: 400px;
+	overflow: auto;
+	margin-top: 15px;
+}
+
+tr.detail-row {
+	height: 0;
+}
+
+tr.element-row:not(.example-expanded-row):hover {
+	background: rgb(50, 50, 50);
+}
+
+tr.element-row:not(.example-expanded-row):active {
+	background: rgb(30, 30, 30);
+}
+
+.element-row td {
+	border-bottom-width: 0;
+}
+
+.table-row-detail {
+	overflow: hidden;
+	display: flex;
+	> div {
+		padding: 8px 0px;
+	}
+}

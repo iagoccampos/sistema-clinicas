@@ -1,0 +1,8 @@
+mat-form-field {
+	width: 100%;
+}
+
+// Correção de bug da altura do mat-select
+.mat-form-field-type-mat-select .mat-form-field-flex {
+	height: 56px !important;
+}
