@@ -38,12 +38,7 @@ export class MaskDirective implements OnInit {
 				return
 			}
 
-			if (!val) {
-				return
-			}
-
-			// Corrigir bug
-			if (val instanceof Date) {
+			if (!val || val instanceof Date) {
 				return
 			}
 
