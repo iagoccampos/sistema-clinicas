@@ -9,7 +9,7 @@ export class InputDateMaskDirective implements OnInit {
 
 	constructor(private elRef: ElementRef, private renderer: Renderer2) { }
 
-	ngOnInit(): void {
+	ngOnInit() {
 		this.oldValue = this.elRef.nativeElement.value
 	}
 

@@ -9,6 +9,6 @@ export class OverviewComponent implements OnInit {
 
 	constructor() { }
 
-	ngOnInit(): void {
+	ngOnInit() {
 	}
 }

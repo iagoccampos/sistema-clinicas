@@ -43,7 +43,7 @@ export class SidenavComponent implements OnInit, OnDestroy, AfterViewInit {
 	constructor(private clinicService: ClinicService, private navService: NavService) { }
 
 	ngAfterViewInit() {
-		this.navService.sideNav = this.sideNav
+		this.navService.setSideNav(this.sideNav)
 	}
 
 	ngOnInit() {

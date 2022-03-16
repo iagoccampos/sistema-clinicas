@@ -4,6 +4,7 @@
 		"codelyzer"
 	],
 	"rules": {
+		"no-unused-variable": true,
 		"prefer-for-of": false,
 		"align": {
 			"options": [

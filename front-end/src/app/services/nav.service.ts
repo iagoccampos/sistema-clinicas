@@ -7,8 +7,8 @@ import { BehaviorSubject } from 'rxjs'
 	providedIn: 'root'
 })
 export class NavService {
-	public sideNav: MatSidenav | null = null
-	public currentUrl = new BehaviorSubject<string>('')
+	private sideNav: MatSidenav | null = null
+	currentUrl = new BehaviorSubject<string>('')
 
 	constructor(private router: Router) {
 		this.router.events.subscribe((event: Event) => {
@@ -18,15 +18,19 @@ export class NavService {
 		})
 	}
 
-	public closeNav() {
+	setSideNav(sideNav: MatSidenav | null) {
+		this.sideNav = sideNav
+	}
+
+	closeNav() {
 		this.sideNav?.close()
 	}
 
-	public openNav() {
+	openNav() {
 		this.sideNav?.open()
 	}
 
-	public toggleNav() {
+	toggleNav() {
 		if (this.sideNav) {
 			this.sideNav.opened ? this.sideNav.close() : this.sideNav.open()
 		}

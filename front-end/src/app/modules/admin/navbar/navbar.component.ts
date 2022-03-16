@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core'
-import { Subject } from 'rxjs'
+import { Component } from '@angular/core'
 import { AuthService } from 'src/app/services/auth.service'
 import { NavService } from 'src/app/services/nav.service'
 
@@ -8,11 +7,17 @@ import { NavService } from 'src/app/services/nav.service'
 	templateUrl: './navbar.component.html',
 	styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
+	private hideToggle = false
 
-	constructor(private authService: AuthService, private navService: NavService) { }
+	get toggleHidden() {
+		return this.hideToggle
+	}
 
-	ngOnInit(): void {
+	constructor(private authService: AuthService, private navService: NavService) {
+		navService.currentUrl.subscribe((url) => {
+			this.hideToggle = url === '/clinicas'
+		})
 	}
 
 	logout() {
