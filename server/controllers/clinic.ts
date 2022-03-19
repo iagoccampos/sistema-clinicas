@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get('', async (req, res, next) => {
 	try {
-		const clinics = await ClinicModel.getClinics()
+		const clinics = await ClinicModel.getClinics(req.query)
 		res.json(clinics)
 	} catch (e) {
 		next(e)

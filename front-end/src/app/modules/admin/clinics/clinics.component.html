@@ -1,8 +1,10 @@
 <div class="container">
+	<app-new-clinic></app-new-clinic>
 	<h1>Clinicas</h1>
-	<div fxLayout="row">
-		<div *ngFor="let clinic of clinics" fxFlex="30">
-			<mat-card class="dashboard-card" [routerLink]="[clinic._id]">
+	<hr>
+	<div gdAreas="el el el" gdAreas.lt-md="el el" gdAreas.lt-sm="el" gdGap="16px" gdRows="auto auto auto">
+		<div *ngFor="let clinic of clinics">
+			<mat-card fxFlex class="dashboard-card">
 				<mat-card-header>
 					<mat-card-title>
 						{{clinic.name}}
@@ -10,13 +12,14 @@
 							<mat-icon>more_vert</mat-icon>
 						</button>
 						<mat-menu #menu="matMenu" xPosition="before">
+							<button mat-menu-item [routerLink]="[clinic._id]">Ir</button>
 							<button mat-menu-item>Configurações</button>
 						</mat-menu>
 					</mat-card-title>
 				</mat-card-header>
 
 				<mat-card-content class="dashboard-card-content">
-					<div>Card Content Here</div>
+					<div>Conteúdo...</div>
 				</mat-card-content>
 			</mat-card>
 		</div>

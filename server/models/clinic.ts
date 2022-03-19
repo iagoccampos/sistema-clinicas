@@ -1,4 +1,4 @@
-import Clinic, { IClinic } from '../schemas/clinic'
+import Clinic, { IClinic, IClinicQuery } from '../schemas/clinic'
 
 class ClinicModel {
 	async createClinic(newClinic: IClinic) {
@@ -8,8 +8,8 @@ class ClinicModel {
 		return clinic
 	}
 
-	async getClinics() {
-		return Clinic.find().lean().exec()
+	async getClinics(query: IClinicQuery) {
+		return Clinic.find(query).lean().exec()
 	}
 
 	async getClinic(id: string) {

@@ -1,0 +1,20 @@
+<mat-expansion-panel hideToggle style="margin-bottom: 1rem;">
+	<mat-expansion-panel-header>
+		<mat-panel-title>
+			<span class="material-icons">
+				add_circle
+			</span>
+			Adicionar Clínica
+		</mat-panel-title>
+	</mat-expansion-panel-header>
+	<form [formGroup]="clinicForm" (ngSubmit)="submit()">
+		<mat-form-field>
+			<mat-label>Nome</mat-label>
+			<input matInput formControlName="name" maxlength="50">
+			<mat-error *ngIf="name?.hasError('clinicExists')">
+				{{ name?.getError('clinicExists') }}
+			</mat-error>
+		</mat-form-field>
+		<button mat-flat-button color="primary">Adicionar</button>
+	</form>
+</mat-expansion-panel>

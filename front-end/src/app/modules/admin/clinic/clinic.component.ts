@@ -15,7 +15,7 @@ export class ClinicComponent implements OnDestroy {
 		const clinicId = this.route.snapshot.paramMap.get('clinicId')
 
 		if (clinicId) {
-			this.clinicService.getClinic(clinicId).subscribe((clinic) => this.clinic = clinic)
+			this.clinicService.selectClinic(clinicId).subscribe((clinic) => this.clinic = clinic)
 		}
 	}
 
