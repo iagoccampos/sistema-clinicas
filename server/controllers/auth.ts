@@ -1,6 +1,6 @@
 import Express from 'express'
 import UserModel from '../models/user'
-import JWT, { Secret } from 'jsonwebtoken'
+import JWT from 'jsonwebtoken'
 import { ForbiddenError } from '../util/errors'
 
 const router = Express.Router()
@@ -9,7 +9,7 @@ router.post('/login', async (req, res, next) => {
 	try {
 		const user = await UserModel.findUserForLogin(req.body.username, req.body.password)
 		if (user) {
-			const token = JWT.sign(user, process.env.JWT_SECRET as Secret, {
+			const token = JWT.sign(user, process.env.JWT_SECRET, {
 				expiresIn: 4 * 60 * 60 // 4h
 			})
 

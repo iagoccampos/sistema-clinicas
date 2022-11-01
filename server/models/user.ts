@@ -13,7 +13,7 @@ class UserModel {
 	}
 
 	async getUser(userId: string) {
-		return User.findById(userId).lean().exec()
+		return User.findById(userId, { password: 0 }).lean().exec()
 	}
 
 	async getAllUsers() {
