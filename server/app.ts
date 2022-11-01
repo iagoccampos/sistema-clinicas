@@ -4,11 +4,8 @@ import mongoose from 'mongoose'
 import api from './routes/api'
 import errorHandler from './util/errorHandler'
 import dotenv from 'dotenv'
-import dotenvParseVariables from 'dotenv-parse-variables'
 
-let env = dotenv.config()
-if (env.error || !env.parsed) throw env.error
-env = dotenvParseVariables(env.parsed, { assignToProcessEnv: true, overrideProcessEnv: true })
+dotenv.config()
 
 mongoose.connect('mongodb://localhost:27017/sistema-clinicas')
 
