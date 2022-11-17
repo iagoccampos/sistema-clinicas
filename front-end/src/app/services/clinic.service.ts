@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core'
 import { Subject } from 'rxjs'
 import { tap } from 'rxjs/operators'
 import { ClinicModel, ClinicQuery } from '../models/clinic.model'
+import { SnackbarService } from './snackbar.service'
 
 @Injectable({
 	providedIn: 'root'
@@ -12,7 +13,7 @@ export class ClinicService {
 
 	onClinicChanged: Subject<ClinicModel | null> = new Subject()
 
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient, private snackbarService: SnackbarService) { }
 
 	getClinics(query?: ClinicQuery) {
 		return this.http.get<ClinicModel[]>(this.clinicUrl, { params: query })

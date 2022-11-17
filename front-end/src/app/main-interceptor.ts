@@ -11,11 +11,11 @@ export class MainInterceptor implements HttpInterceptor {
 
 	constructor(private authService: AuthService) { }
 
-	intercept(req: HttpRequest<any>, next: HttpHandler):
-		Observable<HttpEvent<any>> {
+	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+		const token = this.authService.getToken()
 
-		if (this.authService.getToken()) {
-			const clonedReq = req.clone({ setHeaders: { 'x-access-token': this.authService.getToken() } })
+		if (token) {
+			const clonedReq = req.clone({ setHeaders: { 'x-access-token': token } })
 			return next.handle(clonedReq)
 		}
 

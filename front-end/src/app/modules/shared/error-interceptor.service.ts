@@ -22,12 +22,12 @@ export class ErrorInterceptor implements HttpInterceptor {
 						this.snackBarService.error('Erro interno no servidor. Tente novamente mais tarde.')
 						break
 					default:
-						this.snackBarService.error('Houve um problema na comunicação com o servidor. Tente novamente mais tarde.')
+						this.snackBarService.error(err.error?.message || 'Houve um problema na comunicação com o servidor. Tente novamente mais tarde.')
 						break
 				}
 
 				console.error(err)
-				return throwError(err.error.message)
+				return throwError(err)
 			})
 		)
 	}

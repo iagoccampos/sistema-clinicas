@@ -60,7 +60,7 @@ const patientSchema = new Schema<IPatient>({
 	optimisticConcurrency: true
 })
 
-patientSchema.pre('save', async function (this: IPatient, next) {
+patientSchema.pre('save', async function (next) {
 	const biggestCard = (await patientModel.findOne({ clinic: this.clinic }, { card: 1 }, { sort: { card: -1 } }))?.card
 	this.card = biggestCard ? biggestCard + 1 : 1
 	next()

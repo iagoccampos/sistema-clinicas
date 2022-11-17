@@ -14,12 +14,14 @@ import { CpfPipe } from './pipes/cpf.pipe'
 import { InputDateMaskDirective } from './directives/input-date-mask.directive'
 import { MaskDirective } from './directives/mask.directive'
 import { PhonePipe } from './pipes/phone.pipe'
-import { DeleteConfirmationComponent } from './dialogs/delete-confirmation/delete-confirmation.component'
-import { MessageSnackbarComponent } from './snackbars/message-snackbar/message-snackbar.component'
+import { DeleteConfirmationComponent } from './components/dialogs/delete-confirmation/delete-confirmation.component'
+import { MessageSnackbarComponent } from './components/snackbars/message-snackbar/message-snackbar.component'
+import { ButtonComponent } from './components/button/button.component'
 
 const components = [
 	DeleteConfirmationComponent,
-	MessageSnackbarComponent
+	MessageSnackbarComponent,
+	ButtonComponent
 ]
 
 const modules = [
@@ -55,9 +57,10 @@ const pipes = [
 	declarations: [
 		...components,
 		...directives,
-		...pipes,
+		...pipes
 	],
 	exports: [
+		...components,
 		...modules,
 		...directives,
 		...pipes

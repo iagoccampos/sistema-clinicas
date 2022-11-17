@@ -1,14 +1,15 @@
 import { Request, Response, NextFunction } from 'express'
-import JWT, { Secret } from 'jsonwebtoken'
+import JWT from 'jsonwebtoken'
 import UserModel from '../models/user'
 
 const isValidJWT = (req: Request, res: Response, next: NextFunction) => {
 	const token = req.headers['x-access-token'] as string
+
 	if (!token) {
 		return res.status(401).json({ auth: false, message: 'Nenhum token fornecido.' })
 	}
 
-	JWT.verify(token, process.env.JWT_SECRET as Secret, async (err, decoded) => {
+	JWT.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
 			if (err.message === 'jwt expired') {
 				return res.status(401).json({ auth: false, message: 'Token expirado.' })

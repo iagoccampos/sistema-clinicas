@@ -1,4 +1,4 @@
-<mat-expansion-panel hideToggle style="margin-bottom: 1rem;">
+<mat-expansion-panel hideToggle style="margin-bottom: 1em;">
 	<mat-expansion-panel-header>
 		<mat-panel-title>
 			<span class="material-icons">
@@ -15,6 +15,6 @@
 				{{ name?.getError('clinicExists') }}
 			</mat-error>
 		</mat-form-field>
-		<button mat-flat-button color="primary">Adicionar</button>
+		<app-button [loading]="loading" text="Adicionar"></app-button>
 	</form>
 </mat-expansion-panel>
