@@ -2,26 +2,37 @@
 	<app-new-clinic></app-new-clinic>
 	<h1>Clinicas</h1>
 	<hr>
-	<div gdAreas="el el el" gdAreas.lt-md="el el" gdAreas.lt-sm="el" gdGap="16px" gdRows="auto auto auto">
-		<div *ngFor="let clinic of clinics">
-			<mat-card fxFlex class="dashboard-card">
-				<mat-card-header>
-					<mat-card-title>
-						{{clinic.name}}
-						<button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-							<mat-icon>more_vert</mat-icon>
-						</button>
-						<mat-menu #menu="matMenu" xPosition="before">
-							<button mat-menu-item [routerLink]="[clinic._id]">Ir</button>
-							<button mat-menu-item>Configurações</button>
-						</mat-menu>
-					</mat-card-title>
-				</mat-card-header>
+	<ng-container *ngIf="{ clinics: getClinics$ | async, error: getClinicsError$ | async } as data">
+		<div gdAreas="el el el" gdAreas.lt-md="el el" gdAreas.lt-sm="el" gdGap="16px" gdRows="auto auto auto">
+			<ng-container *ngIf="data.error">
+				{{ data.error }}
+			</ng-container>
+			<ng-container *ngIf="data.clinics && !data.error; else loading">
+				<div *ngFor="let clinic of data.clinics">
+					<mat-card fxFlex class="dashboard-card">
+						<mat-card-header>
+							<mat-card-title>
+								{{clinic.name}}
+								<button mat-icon-button class="more-button" [matMenuTriggerFor]="menu"
+									aria-label="Toggle menu">
+									<mat-icon>more_vert</mat-icon>
+								</button>
+								<mat-menu #menu="matMenu" xPosition="before">
+									<button mat-menu-item [routerLink]="[clinic._id]">Ir</button>
+									<button mat-menu-item>Configurações</button>
+								</mat-menu>
+							</mat-card-title>
+						</mat-card-header>
 
-				<mat-card-content class="dashboard-card-content">
-					<div>Conteúdo...</div>
-				</mat-card-content>
-			</mat-card>
+						<mat-card-content class="dashboard-card-content">
+							<div>Conteúdo...</div>
+						</mat-card-content>
+					</mat-card>
+				</div>
+			</ng-container>
+			<ng-template #loading>
+				<mat-spinner *ngIf="!data.error"></mat-spinner>
+			</ng-template>
 		</div>
-	</div>
+	</ng-container>
 </div>
