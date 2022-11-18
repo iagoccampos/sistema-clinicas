@@ -1,4 +1,4 @@
-table {
+table.mat-table {
 	width: 100%;
 }
 
@@ -28,7 +28,8 @@ tr.element-row:not(.example-expanded-row):active {
 .table-row-detail {
 	overflow: hidden;
 	display: flex;
-	> div {
+
+	>div {
 		padding: 8px 0px;
 	}
 }
