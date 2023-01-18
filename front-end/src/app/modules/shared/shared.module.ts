@@ -17,13 +17,12 @@ import { PhonePipe } from './pipes/phone.pipe'
 import { DeleteConfirmationComponent } from './components/dialogs/delete-confirmation/delete-confirmation.component'
 import { MessageSnackbarComponent } from './components/snackbars/message-snackbar/message-snackbar.component'
 import { ButtonComponent } from './components/button/button.component'
-import { TableComponent } from './components/table/table.component'
+import { TableModule } from './components/table/table.component'
 
 const components = [
 	DeleteConfirmationComponent,
 	MessageSnackbarComponent,
-	ButtonComponent,
-	TableComponent
+	ButtonComponent
 ]
 
 const modules = [
@@ -32,7 +31,8 @@ const modules = [
 	HttpClientModule,
 	RouterModule,
 	AngularMaterialModule,
-	FlexLayoutModule
+	FlexLayoutModule,
+	TableModule
 ]
 
 const directives = [

@@ -6,7 +6,7 @@
 	</thead>
 	<tbody>
 		<tr *ngFor="let el of data">
-			<ng-component *ngTemplateOutlet="rows || defaultRow; context: { $implicit: el }"></ng-component>
+			<ng-container *ngTemplateOutlet="rows || defaultRow; context: { $implicit: el }"></ng-container>
 		</tr>
 	</tbody>
 </table>
