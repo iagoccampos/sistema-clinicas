@@ -11,10 +11,7 @@
 		<mat-form-field>
 			<mat-label>Nome</mat-label>
 			<input matInput formControlName="name" maxlength="50">
-			<mat-error *ngIf="name?.hasError('clinicExists')">
-				{{ name?.getError('clinicExists') }}
-			</mat-error>
 		</mat-form-field>
-		<app-button [loading]="loading" text="Adicionar"></app-button>
+		<app-button [loading]="loading" text="Adicionar" [disabled]="clinicForm.invalid"></app-button>
 	</form>
 </mat-expansion-panel>

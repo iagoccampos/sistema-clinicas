@@ -10,6 +10,7 @@ export class ButtonComponent implements OnInit {
 	@Input() loading = false
 	@Input() disableOnLoading = true
 	@Input() color: 'primary' | 'accent' | 'warn' = 'primary'
+	@Input() disabled = false
 
 	constructor() { }
 

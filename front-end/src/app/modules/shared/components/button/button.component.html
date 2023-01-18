@@ -1,4 +1,5 @@
-<button #button mat-flat-button [color]="color" [class.transparent]="loading" [disabled]="disableOnLoading && loading">
+<button #button mat-flat-button [color]="color" [class.transparent]="loading"
+	[disabled]="(disableOnLoading && loading) || disabled">
 	{{ text }}
 	<mat-spinner *ngIf="loading" [diameter]="22"></mat-spinner>
 </button>
