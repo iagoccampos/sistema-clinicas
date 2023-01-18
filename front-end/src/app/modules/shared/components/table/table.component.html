@@ -18,3 +18,16 @@
 <ng-template #defaultRow let-data>
 	<td *ngFor="let item of data | keyvalue">{{ item.value }}</td>
 </ng-template>
+
+<!-- <app-table [data]="dataSource.data">
+	<ng-container *appTableHeader>
+		<th>Ficha</th>
+		<th>Nome</th>
+		<th>R.G.</th>
+	</ng-container>
+	<ng-container *appTableRow="dataSource.data; let item">
+		<td>{{ item.card }}</td>
+		<td>{{ item.name }}</td>
+		<td>{{ item.rg }}</td>
+	</ng-container>
+</app-table> -->
