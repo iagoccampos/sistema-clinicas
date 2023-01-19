@@ -1,5 +1,6 @@
 import express from 'express'
 import ClinicModel from '../models/clinic'
+import { NotFoundError } from '../util/errors'
 
 const router = express.Router()
 
@@ -15,6 +16,11 @@ router.get('', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
 	try {
 		const clinic = await ClinicModel.getClinic(req.params.id)
+
+		if (!clinic) {
+			throw new NotFoundError('Clínica não encontrada')
+		}
+
 		res.json(clinic)
 	} catch (e) {
 		next(e)
