@@ -1,5 +1,5 @@
 <mat-sidenav-container class="container">
-	<mat-sidenav #sidenav mode="side" [opened]="opened">
+	<mat-sidenav #sidenav mode="side" [opened]="navService.sidenavOpen$ | async">
 		<h1>Clínica: {{ clinic?.name }}</h1>
 		<mat-nav-list>
 			<app-nav-list-item *ngFor="let item of navItems" [item]="item"></app-nav-list-item>

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core'
-import { MatSidenav } from '@angular/material/sidenav'
 import { Event, NavigationEnd, Router } from '@angular/router'
 import { BehaviorSubject } from 'rxjs'
 
@@ -7,7 +6,7 @@ import { BehaviorSubject } from 'rxjs'
 	providedIn: 'root'
 })
 export class NavService {
-	private sideNav: MatSidenav | null = null
+	sidenavOpen$ = new BehaviorSubject(false)
 	currentUrl = new BehaviorSubject<string>('')
 
 	constructor(private router: Router) {
@@ -18,21 +17,7 @@ export class NavService {
 		})
 	}
 
-	setSideNav(sideNav: MatSidenav | null) {
-		this.sideNav = sideNav
-	}
-
-	closeNav() {
-		this.sideNav?.close()
-	}
-
-	openNav() {
-		this.sideNav?.open()
-	}
-
 	toggleNav() {
-		if (this.sideNav) {
-			this.sideNav.opened ? this.sideNav.close() : this.sideNav.open()
-		}
+		this.sidenavOpen$.next(!this.sidenavOpen$.getValue())
 	}
 }

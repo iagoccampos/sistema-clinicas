@@ -1,5 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core'
-import { MatSidenav } from '@angular/material/sidenav'
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
 import { ClinicModel } from 'src/app/models/clinic.model'
 import { NavService } from 'src/app/services/nav.service'
 import { NavItem } from './nav-list-item/nav-list-item.component'
@@ -10,11 +9,8 @@ import { NavItem } from './nav-list-item/nav-list-item.component'
 	styleUrls: ['./sidenav.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SidenavComponent implements AfterViewInit {
-	opened = true
+export class SidenavComponent {
 	@Input() clinic: ClinicModel | null = null
-
-	@ViewChild('sidenav') sideNav: MatSidenav | null = null
 
 	navItems: NavItem[] = [{
 		displayName: 'Visão geral',
@@ -38,9 +34,5 @@ export class SidenavComponent implements AfterViewInit {
 		children: []
 	}]
 
-	constructor(private navService: NavService) { }
-
-	ngAfterViewInit() {
-		this.navService.setSideNav(this.sideNav)
-	}
+	constructor(public navService: NavService) { }
 }
