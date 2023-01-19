@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs'
 	providedIn: 'root'
 })
 export class NavService {
-	sidenavOpen$ = new BehaviorSubject(false)
+	sidenavOpen$ = new BehaviorSubject(true)
 	currentUrl = new BehaviorSubject<string>('')
 
 	constructor(private router: Router) {
