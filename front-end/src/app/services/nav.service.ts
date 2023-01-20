@@ -7,17 +7,15 @@ import { BehaviorSubject } from 'rxjs'
 })
 export class NavService {
 	sidenavOpen$ = new BehaviorSubject(true)
-	currentUrl = new BehaviorSubject<string>('')
+	showSidenavToggle$ = new BehaviorSubject(false)
 
-	constructor(private router: Router) {
-		this.router.events.subscribe((event: Event) => {
-			if (event instanceof NavigationEnd) {
-				this.currentUrl.next(event.urlAfterRedirects)
-			}
-		})
-	}
+	constructor() { }
 
 	toggleNav() {
 		this.sidenavOpen$.next(!this.sidenavOpen$.getValue())
+	}
+
+	showSidenavToggle(show: boolean) {
+		this.showSidenavToggle$.next(show)
 	}
 }

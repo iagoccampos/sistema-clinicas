@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-	<button mat-icon-button (click)="toggleSidenav()" *ngIf="!toggleHidden">
+	<button mat-icon-button (click)="toggleSidenav()" *ngIf="navService.showSidenavToggle$ | async">
 		<span class="material-icons">
 			menu
 		</span>
