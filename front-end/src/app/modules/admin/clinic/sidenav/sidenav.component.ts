@@ -17,21 +17,13 @@ export class SidenavComponent {
 		iconName: '',
 		route: './dashboard'
 	}, {
-		displayName: 'Pacientes',
-		iconName: '',
-		route: `./clinico/pacientes`
-	}, {
 		displayName: 'Clínico',
 		iconName: '',
-		children: []
-	}, {
-		displayName: 'Ortodontia',
-		iconName: '',
-		children: []
-	}, {
-		displayName: 'Endodontia',
-		iconName: '',
-		children: []
+		children: [{
+			displayName: 'Pacientes',
+			iconName: '',
+			route: `./pacientes`
+		}]
 	}]
 
 	constructor(public navService: NavService) { }

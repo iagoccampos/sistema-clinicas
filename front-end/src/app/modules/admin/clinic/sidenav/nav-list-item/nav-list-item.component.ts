@@ -1,7 +1,8 @@
 import { trigger, state, style, transition, animate } from '@angular/animations'
-import { Component, HostBinding, Input, OnInit } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
-import { NavService } from 'src/app/services/nav.service'
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { NavigationEnd, Router } from '@angular/router'
+import { BehaviorSubject, merge } from 'rxjs'
+import { filter, map, tap } from 'rxjs/operators'
 
 export interface NavItem {
 	displayName: string
@@ -23,35 +24,60 @@ export interface NavItem {
 				animate('225ms cubic-bezier(0.4,0.0,0.2,1)')
 			),
 		])
-	]
+	],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavListItemComponent implements OnInit {
-	expanded = false
-	@HostBinding('attr.aria-expanded') ariaExpanded = this.expanded
 	@Input() item: NavItem = { displayName: '', iconName: '' }
 	@Input() depth = 0
+	@Output() onExpand = new EventEmitter<void>(true)
 
-	constructor(private navService: NavService, public router: Router, private activatedRoute: ActivatedRoute) {
-		if (this.depth === undefined) {
-			this.depth = 0
-		}
-	}
+	expanded$ = new BehaviorSubject(false)
+	expandedObs$ = merge(
+		this.router.events.pipe(filter((data): data is NavigationEnd => data instanceof NavigationEnd)),
+		this.expanded$).pipe(
+			map((data) => {
+				if (typeof data === 'boolean') {
+					return data
+				}
+
+				return this.evaluateRoute(data.urlAfterRedirects)
+			}), tap((val) => {
+				if (val) {
+					this.onExpand.next()
+				}
+			})
+		)
+
+	constructor(public router: Router) { }
 
 	ngOnInit() {
-		this.navService.currentUrl.subscribe((url: string) => {
-			if (this.item?.route && url) {
-				this.expanded = url.indexOf(`/${this.item.route}`) === 0
-				this.ariaExpanded = this.expanded
-			}
-		})
+		if (this.evaluateRoute(this.router.url)) {
+			this.expanded$.next(true)
+		}
 	}
 
 	onItemSelected(item: NavItem) {
-		if (!item.children || !item.children.length) {
-			this.router.navigate([item.route], { relativeTo: this.activatedRoute })
+		if (item.children?.length) {
+			this.expanded$.next(!this.expanded$.getValue())
 		}
-		if (item.children && item.children.length) {
-			this.expanded = !this.expanded
+	}
+
+	onChildExpand() {
+		this.expanded$.next(true)
+	}
+
+	private evaluateRoute(url: string) {
+		if (this.item.route) {
+			let route = this.item.route
+
+			if (route.startsWith('.')) {
+				route = route.slice(1)
+			}
+
+			return url.indexOf(route) > -1
 		}
+
+		return false
 	}
 }

@@ -18,11 +18,7 @@ const routes: Routes = [
 				path: ':clinicId', component: ClinicComponent, children: [
 					{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 					{ path: 'dashboard', component: OverviewComponent },
-					{
-						path: 'clinico', children: [
-							{ path: 'pacientes', component: PatientComponent }
-						]
-					}
+					{ path: 'pacientes', component: PatientComponent }
 				]
 			}
 		]

@@ -1,11 +1,23 @@
+@use 'sass:map';
 @use "@angular/material" as mat;
 @import "src/styles.scss";
+
+$color-config: mat.get-color-config($dark-theme);
+$primary-palette: map.get($color-config, 'primary');
 
 :host {
 	display: flex;
 	flex-direction: column;
 	outline: none;
 	width: 100%;
+
+	.mat-list-item.active {
+		background-color: mat.get-color-from-palette($primary-palette, 300);
+	}
+
+	&:hover > .mat-list-item {
+		background-color: mat.get-color-from-palette($primary-palette, 400);
+	}
 }
 
 .mat-list-item {
