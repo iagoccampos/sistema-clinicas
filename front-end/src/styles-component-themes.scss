@@ -1,0 +1,5 @@
+@use 'app/modules/admin/clinic/sidenav/nav-list-item/nav-list-item-theme.component' as nav-list-item;
+
+@mixin themes($theme) {
+  @include nav-list-item.theme($theme);
+}

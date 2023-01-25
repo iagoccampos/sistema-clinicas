@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { AuthService } from 'src/app/services/auth.service'
 import { NavService } from 'src/app/services/nav.service'
+import { ThemeService } from 'src/app/services/theme.service'
 
 @Component({
 	selector: 'app-navbar',
@@ -10,7 +11,7 @@ import { NavService } from 'src/app/services/nav.service'
 })
 export class NavbarComponent {
 
-	constructor(private authService: AuthService, public navService: NavService) { }
+	constructor(private authService: AuthService, public navService: NavService, public themeService: ThemeService) { }
 
 	logout() {
 		this.authService.logout()
@@ -18,5 +19,9 @@ export class NavbarComponent {
 
 	toggleSidenav() {
 		this.navService.toggleNav()
+	}
+
+	toggleLightMode() {
+		this.themeService.toggleIsDarkThemeMode()
 	}
 }

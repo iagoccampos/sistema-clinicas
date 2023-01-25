@@ -1,5 +1,5 @@
-@use "@angular/material" as mat;
-@use "@angular/cdk";
+@use '@angular/material' as mat;
+@use 'styles-component-themes.scss' as styles-component-themes;
 
 @include mat.core();
 
@@ -17,12 +17,12 @@ $light-theme: mat.define-light-theme((
 	)
 ));
 
-// Apply the dark theme by default
-@include mat.all-component-themes($dark-theme);
+@include mat.all-component-themes($light-theme);
+@include styles-component-themes.themes($light-theme);
 
-// Apply the light theme only when the user prefers light themes.
-body.light-theme {
-	@include mat.all-component-themes($light-theme);
+.main-div.dark-theme {
+	@include mat.all-component-colors($dark-theme);
+	@include styles-component-themes.themes($dark-theme);
 }
 
 // Gerado pelo material

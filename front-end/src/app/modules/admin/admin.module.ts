@@ -10,7 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component'
 import { PatientComponent } from './clinic/patient/patient.component'
 import { NavListItemComponent } from './clinic/sidenav/nav-list-item/nav-list-item.component'
 import { NewPatientComponent } from './clinic/patient/new-patient/new-patient.component'
-import { FindPatientComponent } from './clinic/patient/find-patient/find-patient.component';
+import { FindPatientComponent } from './clinic/patient/find-patient/find-patient.component'
 import { NewClinicComponent } from './clinics/new-clinic/new-clinic.component'
 
 @NgModule({
@@ -25,7 +25,7 @@ import { NewClinicComponent } from './clinics/new-clinic/new-clinic.component'
 		NavListItemComponent,
 		NewPatientComponent,
 		FindPatientComponent,
-  NewClinicComponent
+		NewClinicComponent
 	],
 	imports: [CommonModule, SharedModule]
 })

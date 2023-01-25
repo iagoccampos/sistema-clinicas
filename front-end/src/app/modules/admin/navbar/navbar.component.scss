@@ -3,11 +3,8 @@
 }
 
 mat-toolbar {
-	padding: 8px 16px;
-	height: 56px;
-
 	button {
-		height: 56px;
+		height: 100%;
 		border-radius: 0px;
 	}
 
@@ -16,7 +13,7 @@ mat-toolbar {
 	}
 
 	button.selected {
-		background: rgba(0, 0, 0, 0.2);
+		background: rgba(0, 0, 0, 0.2) !important;
 	}
 
 	> span {

@@ -36,6 +36,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatDialogModule } from '@angular/material/dialog'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 
 const materialModules = [
 	OverlayModule,
@@ -73,7 +74,8 @@ const materialModules = [
 	MatNativeDateModule,
 	MatTooltipModule,
 	MatCheckboxModule,
-	MatDialogModule
+	MatDialogModule,
+	MatSlideToggleModule
 ]
 
 @Injectable()
