@@ -10,8 +10,12 @@ export class NavService {
 
 	constructor() { }
 
-	toggleNav() {
+	toggleSidenav() {
 		this.sidenavOpen$.next(!this.sidenavOpen$.getValue())
+	}
+
+	showSidenav() {
+		this.sidenavOpen$.next(true)
 	}
 
 	showSidenavToggle(show: boolean) {

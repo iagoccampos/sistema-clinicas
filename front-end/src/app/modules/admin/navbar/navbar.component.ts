@@ -18,7 +18,7 @@ export class NavbarComponent {
 	}
 
 	toggleSidenav() {
-		this.navService.toggleNav()
+		this.navService.toggleSidenav()
 	}
 
 	toggleLightMode() {
