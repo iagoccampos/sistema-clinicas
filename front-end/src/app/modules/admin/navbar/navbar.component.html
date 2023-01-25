@@ -11,7 +11,7 @@
 	<span class="spacer"></span>
 	<button mat-icon-button (click)="toggleLightMode()">
 		<span class="material-icons">
-			{{ (themeService.isDarkThemeObs$ | async) ? 'light_mode' : 'dark_mode'}}
+			{{ (themeService.isDarkTheme$ | async) ? 'light_mode' : 'dark_mode'}}
 		</span>
 	</button>
 	<button mat-icon-button>
