@@ -14,7 +14,7 @@ export class TableHeaderTemplateDirective { }
 	selector: 'ng-template[appTableRow]'
 })
 export class TableRowTemplateDirective<T extends object> {
-	@Input('appTableRow') data: T[] = []
+	@Input() appTableRow: T[] = []
 
 	static ngTemplateContextGuard<TContextItem extends object>(
 		dir: TableRowTemplateDirective<TContextItem>,

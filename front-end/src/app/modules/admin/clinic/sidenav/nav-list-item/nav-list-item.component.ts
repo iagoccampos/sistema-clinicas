@@ -30,7 +30,7 @@ export interface NavItem {
 export class NavListItemComponent implements OnInit {
 	@Input() item: NavItem = { displayName: '', iconName: '' }
 	@Input() depth = 0
-	@Output() onExpand = new EventEmitter<void>(true)
+	@Output() expand = new EventEmitter<void>(true)
 
 	expanded$ = new BehaviorSubject(false)
 	expandedObs$ = merge(
@@ -44,7 +44,7 @@ export class NavListItemComponent implements OnInit {
 				return this.evaluateRoute(data.urlAfterRedirects)
 			}), tap((val) => {
 				if (val) {
-					this.onExpand.next()
+					this.expand.next()
 				}
 			})
 		)
