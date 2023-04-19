@@ -1,27 +1,19 @@
-import { Component, ElementRef, ViewChild } from '@angular/core'
-import { MatExpansionPanel } from '@angular/material/expansion'
-import { SharedService } from './shared.service'
+import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+import { PatientService } from 'src/app/services/patient.service'
 
 @Component({
 	selector: 'app-patient',
 	templateUrl: './patient.component.html',
-	providers: [SharedService],
 	styleUrls: ['./patient.component.scss']
 })
 export class PatientComponent {
-	@ViewChild('patientPanel', { read: ElementRef }) expansionPanelRef!: ElementRef
-	@ViewChild('patientPanel', { read: MatExpansionPanel }) expansionPanel!: MatExpansionPanel
+	private readonly clinicId
+	constructor(private patientService: PatientService, private router: ActivatedRoute) {
+		this.clinicId = this.router.snapshot.paramMap.get('clinicId') as string
+	}
 
-	editingPatient = false
-
-	constructor(private sharedService: SharedService) {
-		sharedService.onModeChange.subscribe((patient) => {
-			if (patient) {
-				this.expansionPanel.open()
-				this.expansionPanelRef.nativeElement.scrollIntoView({ behavior: 'smooth' })
-			}
-
-			this.editingPatient = !!patient
-		})
+	addPatient() {
+		this.patientService.openPatientDialog({ clinicId: this.clinicId })
 	}
 }

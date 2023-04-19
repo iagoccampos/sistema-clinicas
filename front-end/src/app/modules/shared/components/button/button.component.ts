@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core'
 })
 export class ButtonComponent {
 	@Input() text = ''
-	@Input() loading = false
+	@Input() loading: boolean | null = false
 	@Input() disableOnLoading = true
 	@Input() color: 'primary' | 'accent' | 'warn' = 'primary'
 	@Input() disabled = false

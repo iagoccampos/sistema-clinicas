@@ -5,12 +5,11 @@ import { MatPaginator } from '@angular/material/paginator'
 import { MatTableDataSource } from '@angular/material/table'
 import { ActivatedRoute } from '@angular/router'
 import { interval } from 'rxjs'
-import { debounce, delay } from 'rxjs/operators'
-import { Patient } from 'src/app/models/patient.model'
+import { debounce } from 'rxjs/operators'
+import { IPatient } from 'src/app/models/patient.model'
 import { DialogService } from 'src/app/services/dialog.service'
 import { PatientService } from 'src/app/services/patient.service'
 import { resetForm } from 'src/util/util'
-import { SharedService } from '../shared.service'
 
 @Component({
 	selector: 'app-find-patient',
@@ -38,13 +37,12 @@ export class FindPatientComponent implements AfterViewInit {
 	})
 
 	displayedColumns: string[] = ['card', 'name', 'birthday', 'rg', 'cpf']
-	dataSource: MatTableDataSource<Patient> = new MatTableDataSource()
-	expandedPatient: Patient | null = null
+	dataSource: MatTableDataSource<IPatient> = new MatTableDataSource()
+	expandedPatient: IPatient | null = null
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator
 
-	constructor(private patientService: PatientService, private router: ActivatedRoute, private sharedService: SharedService,
-		private dialogService: DialogService) {
+	constructor(private patientService: PatientService, private router: ActivatedRoute, private dialogService: DialogService) {
 		this.clinicId = this.router.snapshot.paramMap.get('clinicId') as string
 		this.initialValues = this.findPatientsForm.value
 	}
@@ -64,8 +62,8 @@ export class FindPatientComponent implements AfterViewInit {
 		this.getPatients()
 	}
 
-	editPatient(patient: Patient) {
-		this.sharedService.editPatient(patient)
+	editPatient(patient: IPatient) {
+		this.patientService.openPatientDialog({ clinicId: this.clinicId, patient })
 	}
 
 	deletePatient(patientId: string) {

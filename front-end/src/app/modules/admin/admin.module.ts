@@ -9,9 +9,9 @@ import { OverviewComponent } from './clinic/overview/overview.component'
 import { NavbarComponent } from './navbar/navbar.component'
 import { PatientComponent } from './clinic/patient/patient.component'
 import { NavListItemComponent } from './clinic/sidenav/nav-list-item/nav-list-item.component'
-import { NewPatientComponent } from './clinic/patient/new-patient/new-patient.component'
 import { FindPatientComponent } from './clinic/patient/find-patient/find-patient.component'
 import { NewClinicComponent } from './clinics/new-clinic/new-clinic.component'
+import { PatientDialogComponent } from './clinic/patient/patient-dialog/patient-dialog.component'
 
 @NgModule({
 	declarations: [
@@ -23,9 +23,9 @@ import { NewClinicComponent } from './clinics/new-clinic/new-clinic.component'
 		NavbarComponent,
 		PatientComponent,
 		NavListItemComponent,
-		NewPatientComponent,
 		FindPatientComponent,
-		NewClinicComponent
+		NewClinicComponent,
+		PatientDialogComponent
 	],
 	imports: [CommonModule, SharedModule]
 })

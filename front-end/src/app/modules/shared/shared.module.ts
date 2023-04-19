@@ -18,11 +18,13 @@ import { DeleteConfirmationComponent } from './components/dialogs/delete-confirm
 import { MessageSnackbarComponent } from './components/snackbars/message-snackbar/message-snackbar.component'
 import { ButtonComponent } from './components/button/button.component'
 import { TableModule } from './components/table/table.component'
+import { ModuleHeaderComponent } from './components/module-header/module-header.component'
 
 const components = [
 	DeleteConfirmationComponent,
 	MessageSnackbarComponent,
-	ButtonComponent
+	ButtonComponent,
+	ModuleHeaderComponent
 ]
 
 const modules = [
@@ -59,7 +61,7 @@ const pipes = [
 	declarations: [
 		...components,
 		...directives,
-		...pipes
+		...pipes,
 	],
 	exports: [
 		...components,

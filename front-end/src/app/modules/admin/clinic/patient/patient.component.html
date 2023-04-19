@@ -1,26 +1,13 @@
-<h1>Pacientes: Clínico</h1>
-<hr>
-<mat-accordion multi>
-	<mat-expansion-panel #patientPanel>
-		<mat-expansion-panel-header>
-			<mat-panel-title>
-				<span class="material-icons">
-					{{ editingPatient ? 'edit' : 'person_add'}}
-				</span>
-				{{ editingPatient ? 'Editar' : 'Adicionar'}} Paciente
-			</mat-panel-title>
-		</mat-expansion-panel-header>
-		<app-new-patient></app-new-patient>
-	</mat-expansion-panel>
-	<mat-expansion-panel expanded="true">
-		<mat-expansion-panel-header>
-			<mat-panel-title>
-				<span class="material-icons">
-					person_search
-				</span>
-				Procurar Pacientes
-			</mat-panel-title>
-		</mat-expansion-panel-header>
-		<app-find-patient></app-find-patient>
-	</mat-expansion-panel>
-</mat-accordion>
+<app-module-header titile="Pacientes"></app-module-header>
+<button mat-flat-button color="primary" type="button" (click)="addPatient()">Adicionar Paciente</button>
+<mat-expansion-panel expanded="true" [hideToggle]="true">
+	<mat-expansion-panel-header>
+		<mat-panel-title>
+			<span class="material-icons">
+				person_search
+			</span>
+			Procurar Pacientes
+		</mat-panel-title>
+	</mat-expansion-panel-header>
+	<app-find-patient></app-find-patient>
+</mat-expansion-panel>

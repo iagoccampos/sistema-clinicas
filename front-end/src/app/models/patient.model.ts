@@ -1,4 +1,4 @@
-export interface NewPatient {
+export interface INewPatient {
 	name: string
 	birthday?: string
 	rg?: string
@@ -6,7 +6,7 @@ export interface NewPatient {
 	phones?: string[]
 }
 
-export interface Patient {
+export interface IPatient {
 	_id: string
 	name: string
 	card: number
