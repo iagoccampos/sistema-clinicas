@@ -12,6 +12,7 @@ import { NavListItemComponent } from './clinic/sidenav/nav-list-item/nav-list-it
 import { FindPatientComponent } from './clinic/patient/find-patient/find-patient.component'
 import { NewClinicComponent } from './clinics/new-clinic/new-clinic.component'
 import { PatientDialogComponent } from './clinic/patient/patient-dialog/patient-dialog.component'
+import { AdminRoutingModule } from './admin-routing.module'
 
 @NgModule({
 	declarations: [
@@ -27,6 +28,6 @@ import { PatientDialogComponent } from './clinic/patient/patient-dialog/patient-
 		NewClinicComponent,
 		PatientDialogComponent
 	],
-	imports: [CommonModule, SharedModule]
+	imports: [CommonModule, SharedModule, AdminRoutingModule]
 })
 export class AdminModule { }

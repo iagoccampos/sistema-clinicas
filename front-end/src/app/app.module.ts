@@ -4,7 +4,6 @@ import { LOCALE_ID, NgModule } from '@angular/core'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { AuthModule } from './modules/auth/auth.module'
-import { AdminModule } from './modules/admin/admin.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { SharedModule } from './modules/shared/shared.module'
 import { HTTP_INTERCEPTORS } from '@angular/common/http'
@@ -25,7 +24,6 @@ registerLocaleData(localePt, localePtExtra)
 		BrowserModule,
 		AppRoutingModule,
 		AuthModule,
-		AdminModule,
 		BrowserAnimationsModule,
 		ReactiveFormsModule,
 		SharedModule
